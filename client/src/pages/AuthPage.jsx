@@ -21,11 +21,16 @@ const AuthPage = () => {
         setError('');
         try {
             if (isLogin) {
-                await login(formData.email, formData.password);
+                const data = await login(formData.email, formData.password);
+                if (data.user?.role === 'admin') {
+                    navigate('/admin', { replace: true });
+                } else {
+                    navigate(from, { replace: true });
+                }
             } else {
                 await register(formData.name, formData.email, formData.password);
+                navigate(from, { replace: true });
             }
-            navigate(from, { replace: true });
         } catch (err) {
             setError(err.response?.data?.error || 'Authentication failed');
         }

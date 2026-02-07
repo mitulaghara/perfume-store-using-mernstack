@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, ShoppingCart, User, Search, LogOut, UserCircle, Package, X } from 'lucide-react';
+import { Menu, ShoppingCart, User, Search, LogOut, UserCircle, Package, X, LayoutDashboard } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
@@ -177,6 +177,16 @@ const Navbar = () => {
                                             <Package className="w-4 h-4" />
                                             <span>My Orders</span>
                                         </Link>
+                                        {user?.role === 'admin' && (
+                                            <Link
+                                                to="/admin"
+                                                className="flex items-center space-x-2 px-4 py-2 hover:bg-indigo-50 text-primary font-bold"
+                                                onClick={() => setShowUserMenu(false)}
+                                            >
+                                                <LayoutDashboard className="w-4 h-4" />
+                                                <span>Admin Panel</span>
+                                            </Link>
+                                        )}
                                         <hr className="my-2" />
                                         <button
                                             onClick={() => { logout(); setShowUserMenu(false); }}
@@ -210,6 +220,11 @@ const Navbar = () => {
                             {isAuthenticated && (
                                 <>
                                     <Link to="/profile" onClick={() => setShowMobileMenu(false)} className="text-gray-700 font-medium hover:text-primary">My Profile</Link>
+                                    {user?.role === 'admin' && (
+                                        <Link to="/admin" onClick={() => setShowMobileMenu(false)} className="text-primary font-bold flex items-center gap-2">
+                                            <LayoutDashboard className="w-5 h-5" /> Admin Panel
+                                        </Link>
+                                    )}
                                     <button onClick={() => { logout(); setShowMobileMenu(false); }} className="text-red-500 font-medium text-left">Logout</button>
                                 </>
                             )}

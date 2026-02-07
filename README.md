@@ -26,18 +26,21 @@ Welcome to **Mitul's Market**, a high-end, full-stack e-commerce platform design
 - **Order Tracking**: Comprehensive order status updates via Socket.io.
 - **Secure Checkout**: Streamlined process for a faster conversion.
 
-### 🛡️ **Admin Powers**
-- **Bulk Operations**: Select and delete multiple orders at once with ease.
-- **Dashboard**: Real-time overview of sales, orders, and products.
+### 🛡️ Admin Access
+- **Role-based Redirection**: Automatic redirection to the admin dashboard for authorized users upon login.
+- **Dynamic Meta Updates**: The browser tab title and favicon change dynamically (Shield icon for Admin, Cart icon for Store) to clearly distinguish between roles.
+- **Dashboard Overview**: Real-time stats for revenue, orders, and inventory.
 - **Product Management**: Complete CRUD capabilities for your inventory.
+- **Bulk Operations**: Select and delete multiple orders at once with ease.
 
 ### ✨ **Visual & Security Upgrades**
+- **Dynamic UI**: Browser tabs and icons update in real-time based on the route.
 - **Elegant Splash Screen**: A premium, "no-wave" entry animation for a sophisticated feel.
-- **Enhanced Security**: Robust JWT authentication ensuring user data privacy.
+- **Enhanced Security**: Robust JWT authentication and role-protected routes.
 
 ### ⚙️ **Developer Friendly**
+- **Admin Seeding**: Built-in script (`seedAdmin.js`) to quickly set up admin credentials.
 - **Clean Codebase**: Modular React components and organized Express backend.
-- **Scalable Architecture**: Built with MongoDB for flexible data management.
 - **Real-time Engine**: Powered by Socket.io for instant updates.
 
 ---

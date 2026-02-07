@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const AuthModal = ({ isOpen, onClose, mode: initialMode = 'login' }) => {
     const [mode, setMode] = useState(initialMode);
@@ -8,6 +9,7 @@ const AuthModal = ({ isOpen, onClose, mode: initialMode = 'login' }) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const { login, register } = useAuth();
+    const navigate = useNavigate();
 
     if (!isOpen) return null;
 
@@ -18,7 +20,10 @@ const AuthModal = ({ isOpen, onClose, mode: initialMode = 'login' }) => {
 
         try {
             if (mode === 'login') {
-                await login(formData.email, formData.password);
+                const data = await login(formData.email, formData.password);
+                if (data.user?.role === 'admin') {
+                    navigate('/admin');
+                }
             } else {
                 await register(formData.name, formData.email, formData.password);
             }
