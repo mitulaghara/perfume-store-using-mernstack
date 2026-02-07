@@ -1,6 +1,6 @@
 # 🛍️ Mitul's Market - Premium E-Commerce Experience
 
-[![Status](https://img.shields.io/badge/Status-Ultra--Attractive-brightgreen)](https://github.com/mitulaghara/Mituls-Market)
+[![Status](https://img.shields.io/badge/Status-Ultra--Attractive-brightgreen)](https://github.com/mitulaghara/Mitul-s-Market-E-Commerce)
 [![Live Demo](https://img.shields.io/badge/Demo-Live-blue)](http://localhost:5173)
 
 Welcome to **Mitul's Market**, a high-end, full-stack e-commerce platform designed for a premium shopping experience. Featuring an ultra-attractive UI, real-time interactions, and a seamless checkout flow.
@@ -62,8 +62,8 @@ Welcome to **Mitul's Market**, a high-end, full-stack e-commerce platform design
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/mitulaghara/Mituls-Market.git
-   cd Mituls-Market
+   git clone https://github.com/mitulaghara/Mitul-s-Market-E-Commerce.git
+   cd Mitul-s-Market-E-Commerce
    ```
 
 2. **Setup Backend**
