@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin, Heart, ArrowRight } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin, Heart, ArrowRight, Linkedin, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -16,14 +16,14 @@ const Footer = () => {
                             Your premium destination for quality tech and lifestyle products. We believe in quality, style, and exceptional service.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all duration-300 group">
-                                <Facebook className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                            <a href="https://github.com/mitulaghara" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all duration-300 group">
+                                <Github className="w-5 h-5 text-gray-400 group-hover:text-white" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition-all duration-300 group">
+                            <a href="https://www.instagram.com/mitul_aghara/" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition-all duration-300 group">
                                 <Instagram className="w-5 h-5 text-gray-400 group-hover:text-white" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition-all duration-300 group">
-                                <Twitter className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                            <a href="https://www.linkedin.com/in/mitul-aghara-602a72332/" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition-all duration-300 group">
+                                <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-white" />
                             </a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                                <span className="text-sm">+91 98765 43210</span>
+                                <span className="text-sm">+91 88668 77692</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-primary shrink-0" />
