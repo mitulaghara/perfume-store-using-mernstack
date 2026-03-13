@@ -69,7 +69,7 @@ const Navbar = () => {
                             <Menu className="w-6 h-6" />
                         </button>
                         <Link to="/" className="text-2xl font-bold text-primary flex items-center">
-                            <span className="text-dark">Krisha's</span>Market
+                            <span className="text-dark">Mitul's</span>Market
                         </Link>
                     </div>
 

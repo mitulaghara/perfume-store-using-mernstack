@@ -68,7 +68,7 @@ const AuthModal = ({ isOpen, onClose, mode: initialMode = 'login' }) => {
                                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                placeholder="Krisha Aghara"
+                                placeholder="Mitul Aghara"
                             />
                         </div>
                     )}

@@ -10,7 +10,7 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="space-y-6">
                         <Link to="/" className="text-3xl font-bold flex items-center gap-2">
-                            <span className="text-primary">Krisha's</span>Market
+                            <span className="text-primary">Mitul's</span>Market
                         </Link>
                         <p className="text-gray-400 leading-relaxed text-sm">
                             Your premium destination for quality tech and lifestyle products. We believe in quality, style, and exceptional service.
@@ -94,10 +94,10 @@ const Footer = () => {
                 <div className="border-t border-gray-800 pt-8 mt-8">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-gray-500 text-sm">
-                            © {new Date().getFullYear()} Krisha's Market. All rights reserved.
+                            © {new Date().getFullYear()} Mitul's Market. All rights reserved.
                         </p>
                         <p className="flex items-center gap-1 text-gray-500 text-sm">
-                            Designed with <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" /> by Krisha's Market
+                            Designed with <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" /> by Mitul's Market
                         </p>
                     </div>
                 </div>

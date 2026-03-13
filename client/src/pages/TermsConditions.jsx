@@ -22,7 +22,7 @@ const TermsConditions = () => {
                     <div className="p-8 md:p-12 space-y-8">
                         <div className="prose max-w-none text-gray-600">
                             <p className="text-lg leading-relaxed mb-8">
-                                Welcome to Krisha's Market. By accessing or using our website, you agree to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree with any part of these terms, please do not use our services.
+                                Welcome to Mitul's Market. By accessing or using our website, you agree to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree with any part of these terms, please do not use our services.
                             </p>
                         </div>
 
@@ -64,14 +64,14 @@ const TermsConditions = () => {
                         <section>
                             <h2 className="text-xl font-bold text-gray-900 mb-4">4. Intellectual Property</h2>
                             <p className="text-gray-600 leading-relaxed mb-4">
-                                All content included on this site, such as text, graphics, logos, images, and software, is the property of Krisha's Market or its content suppliers and protected by copyright laws.
+                                All content included on this site, such as text, graphics, logos, images, and software, is the property of Mitul's Market or its content suppliers and protected by copyright laws.
                             </p>
                         </section>
 
                         <section>
                             <h2 className="text-xl font-bold text-gray-900 mb-4">5. Limitation of Liability</h2>
                             <p className="text-gray-600 leading-relaxed mb-4">
-                                Krisha's Market shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our services.
+                                Mitul's Market shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our services.
                             </p>
                         </section>
 

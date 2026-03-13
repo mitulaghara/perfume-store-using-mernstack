@@ -32,7 +32,7 @@ function AppContent() {
 
   React.useEffect(() => {
     // Dynamic Title
-    document.title = isAdminRoute ? "Admin Panel | Krisha's Market" : "Krisha's Market | Store";
+    document.title = isAdminRoute ? "Admin Panel | Mitul's Market" : "Mitul's Market | Store";
 
     // Dynamic Favicon
     const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
