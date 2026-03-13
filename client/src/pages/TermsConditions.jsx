@@ -22,7 +22,7 @@ const TermsConditions = () => {
                     <div className="p-8 md:p-12 space-y-8">
                         <div className="prose max-w-none text-gray-600">
                             <p className="text-lg leading-relaxed mb-8">
-                                Welcome to mitul's Market. By accessing or using our website, you agree to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree with any part of these terms, please do not use our services.
+                                Welcome to Krisha's Market. By accessing or using our website, you agree to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree with any part of these terms, please do not use our services.
                             </p>
                         </div>
 
@@ -64,14 +64,14 @@ const TermsConditions = () => {
                         <section>
                             <h2 className="text-xl font-bold text-gray-900 mb-4">4. Intellectual Property</h2>
                             <p className="text-gray-600 leading-relaxed mb-4">
-                                All content included on this site, such as text, graphics, logos, images, and software, is the property of mitul's Market or its content suppliers and protected by copyright laws.
+                                All content included on this site, such as text, graphics, logos, images, and software, is the property of Krisha's Market or its content suppliers and protected by copyright laws.
                             </p>
                         </section>
 
                         <section>
                             <h2 className="text-xl font-bold text-gray-900 mb-4">5. Limitation of Liability</h2>
                             <p className="text-gray-600 leading-relaxed mb-4">
-                                mitul's Market shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our services.
+                                Krisha's Market shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our services.
                             </p>
                         </section>
 
@@ -85,7 +85,7 @@ const TermsConditions = () => {
                         <div className="bg-gray-50 border-1 border-gray-200 p-6 rounded-lg mt-8">
                             <p className="text-gray-700 font-medium mb-2">Contact Us</p>
                             <p className="text-gray-600 text-sm">
-                                For any questions regarding these Terms & Conditions, please contact us at <span className="font-semibold">legal@mitulmarket.com</span>.
+                                For any questions regarding these Terms & Conditions, please contact us at <span className="font-semibold">legal@krishamarket.com</span>.
                             </p>
                         </div>
                     </div>

@@ -84,7 +84,7 @@ const PrivacyPolicy = () => {
 
                         <div className="border-t border-gray-200 pt-8 mt-8">
                             <p className="text-gray-500 italic text-sm">
-                                If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@mitulmarket.com" className="text-primary hover:underline">privacy@mitulmarket.com</a>.
+                                If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@krishamarket.com" className="text-primary hover:underline">privacy@krishamarket.com</a>.
                             </p>
                         </div>
                     </div>
