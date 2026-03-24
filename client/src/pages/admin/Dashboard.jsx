@@ -3,7 +3,6 @@ import axios from 'axios';
 import { TrendingUp, Users, DollarSign, ShoppingBag } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { io } from 'socket.io-client';
-import LoadingSpinner from '../../components/LoadingSpinner';
 
 const socket = io('http://localhost:5001');
 
@@ -43,7 +42,6 @@ const AdminDashboard = () => {
         };
         fetchData();
 
-        // Socket Listeners for Real-time Updates
         socket.on('newProduct', (newProduct) => {
             setStats(prev => ({
                 ...prev,
@@ -53,7 +51,6 @@ const AdminDashboard = () => {
         });
 
         socket.on('orderUpdate', (updatedOrder) => {
-            // Re-fetch everything for complexity or update specifically
             fetchData();
         });
 
@@ -67,113 +64,114 @@ const AdminDashboard = () => {
         { name: 'Jan', sales: 4000 },
         { name: 'Feb', sales: 3000 },
         { name: 'Mar', sales: 2000 },
-        { name: 'Apr', sales: stats.totalSales }, // Dynamic
+        { name: 'Apr', sales: stats.totalSales },
         { name: 'May', sales: 1890 },
         { name: 'Jun', sales: 2390 },
     ];
 
     if (loading) {
         return (
-            <div className="pt-20">
-                <LoadingSpinner message="Loading dashboard..." />
+            <div className="min-h-screen flex items-center justify-center bg-white">
+                <div className="w-12 h-12 border-t-2 border-black rounded-full animate-spin"></div>
             </div>
         );
     }
 
     return (
-        <div className="pb-20 md:pb-0">
-            <h1 className="text-2xl md:text-3xl font-bold text-dark mb-6 md:mb-8">Dashboard Overview</h1>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-                <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-3 md:space-x-4">
-                    <div className="p-4 bg-blue-50 text-blue-600 rounded-xl">
-                        <DollarSign className="w-6 h-6" />
-                    </div>
-                    <div>
-                        <p className="text-gray-500 text-xs md:text-sm">Total Revenue</p>
-                        <h3 className="text-xl md:text-2xl font-bold text-dark">₹{stats.totalSales.toLocaleString()}</h3>
-                    </div>
-                </div>
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-4">
-                    <div className="p-4 bg-purple-50 text-purple-600 rounded-xl">
-                        <ShoppingBag className="w-6 h-6" />
-                    </div>
-                    <div>
-                        <p className="text-gray-500 text-sm">Total Orders</p>
-                        <h3 className="text-2xl font-bold text-dark">{stats.totalOrders}</h3>
-                    </div>
-                </div>
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-4">
-                    <div className="p-4 bg-green-50 text-green-600 rounded-xl">
-                        <TrendingUp className="w-6 h-6" />
-                    </div>
-                    <div>
-                        <p className="text-gray-500 text-sm">Total Products</p>
-                        <h3 className="text-2xl font-bold text-dark">{stats.totalProducts}</h3>
-                    </div>
-                </div>
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-4">
-                    <div className="p-4 bg-orange-50 text-orange-600 rounded-xl">
-                        <Users className="w-6 h-6" />
-                    </div>
-                    <div>
-                        <p className="text-gray-500 text-sm">Active Users</p>
-                        <h3 className="text-2xl font-bold text-dark">126</h3>
-                    </div>
-                </div>
+        <div className="pb-20 md:pb-0 font-sans">
+            <div className="flex flex-col mb-12 space-y-2">
+                <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40">Intelligence</p>
+                <h1 className="text-4xl font-serif">Store <span className="italic">Overview</span></h1>
             </div>
 
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                {[
+                    { label: 'Total Revenue', value: `₹${stats.totalSales.toLocaleString()}`, icon: DollarSign },
+                    { label: 'Total Orders', value: stats.totalOrders, icon: ShoppingBag },
+                    { label: 'Total Products', value: stats.totalProducts, icon: TrendingUp },
+                    { label: 'Active Users', value: '126', icon: Users }
+                ].map((stat, i) => (
+                    <div key={i} className="bg-white p-8 border border-black/5 hover:border-black transition-all">
+                        <div className="flex flex-col gap-6">
+                            <stat.icon className="w-5 h-5 opacity-20" />
+                            <div>
+                                <p className="text-[10px] font-black uppercase tracking-widest text-black/40 mb-1">{stat.label}</p>
+                                <h3 className="text-2xl font-bold tracking-tighter">{stat.value}</h3>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 {/* Sales Chart */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 className="text-lg md:text-xl font-bold text-dark mb-4 md:mb-6">Sales Analytics</h3>
-                    <div className="h-64 md:h-80 w-full">
+                <div className="bg-white p-10 border border-black/5">
+                    <div className="flex items-center justify-between mb-10">
+                        <h3 className="text-sm font-black uppercase tracking-[0.2em]">Sales Analytics</h3>
+                        <div className="text-[10px] text-black/40 font-bold uppercase tracking-widest">Monthly Frequency</div>
+                    </div>
+                    <div className="h-80 w-full grayscale contrast-125">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={data}>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip />
-                                <Bar dataKey="sales" fill="#4F46E5" radius={[4, 4, 0, 0]} />
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
+                                <XAxis 
+                                    dataKey="name" 
+                                    tick={{ fontSize: 10, fontWeight: 900, fill: '#000' }} 
+                                    axisLine={{ stroke: '#000', strokeWidth: 0.5 }}
+                                    tickLine={false}
+                                />
+                                <YAxis 
+                                    tick={{ fontSize: 10, fontWeight: 900, fill: '#000' }}
+                                    axisLine={{ stroke: '#000', strokeWidth: 0.5 }}
+                                    tickLine={false}
+                                />
+                                <Tooltip 
+                                    contentStyle={{ borderRadius: '0', border: '1px solid #000', fontSize: '10px', textTransform: 'uppercase', fontWeight: 900 }}
+                                    cursor={{ fill: '#000', opacity: 0.05 }}
+                                />
+                                <Bar dataKey="sales" fill="#000" radius={[0, 0, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
 
                 {/* Recent Products */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 className="text-lg md:text-xl font-bold text-dark mb-4 md:mb-6">Recently Added Products</h3>
+                <div className="bg-white p-10 border border-black/5">
+                    <div className="flex items-center justify-between mb-10">
+                        <h3 className="text-sm font-black uppercase tracking-[0.2em]">Recent Acquisitions</h3>
+                        <div className="text-[10px] text-black/40 font-bold uppercase tracking-widest">Lately Added</div>
+                    </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
-                            <thead className="bg-gray-50 text-gray-500 text-xs uppercase font-bold">
+                            <thead className="text-black/40 text-[9px] uppercase font-black border-b border-black/5">
                                 <tr>
-                                    <th className="px-4 py-3 rounded-l-lg">Product</th>
-                                    <th className="px-4 py-3">Price</th>
-                                    <th className="px-4 py-3 rounded-r-lg">Stock</th>
+                                    <th className="px-4 py-4 tracking-widest">Fragment</th>
+                                    <th className="px-4 py-4 tracking-widest text-right">Value</th>
+                                    <th className="px-4 py-4 tracking-widest text-right">Status</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-50">
+                            <tbody className="divide-y divide-black/5">
                                 {stats.recentProducts && stats.recentProducts.map((product) => (
-                                    <tr key={product._id} className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-4 py-3">
-                                            <div className="flex items-center space-x-3">
-                                                <img src={product.image} alt="" className="w-10 h-10 rounded-lg object-cover bg-gray-100" />
-                                                <div className="font-medium text-dark text-sm truncate max-w-[150px]">{product.name}</div>
+                                    <tr key={product._id} className="group hover:bg-black/5 transition-colors">
+                                        <td className="px-4 py-6">
+                                            <div className="flex items-center space-x-4">
+                                                <div className="w-10 h-14 border border-black/5 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                                                    <img src={product.image} alt="" className="w-full h-full object-cover" />
+                                                </div>
+                                                <div className="text-[10px] font-black uppercase tracking-wider truncate max-w-[150px]">{product.name}</div>
                                             </div>
                                         </td>
-                                        <td className="px-4 py-3 text-sm font-bold text-gray-700">₹{product.price}</td>
-                                        <td className="px-4 py-3">
-                                            <span className={`px-2 py-1 rounded-full text-xs font-bold ${product.stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                                                {product.stock > 0 ? `${product.stock} in stock` : 'Out of Stock'}
+                                        <td className="px-4 py-6 text-[10px] font-black tracking-widest text-right">₹{product.price}</td>
+                                        <td className="px-4 py-6 text-right">
+                                            <span className={`text-[8px] font-black uppercase tracking-[0.2em] border px-2 py-1 ${product.stock > 0 ? 'border-black text-black' : 'border-red-600 text-red-600'}`}>
+                                                {product.stock > 0 ? `Stock: ${product.stock}` : 'Depleted'}
                                             </span>
                                         </td>
                                     </tr>
                                 ))}
                                 {(!stats.recentProducts || stats.recentProducts.length === 0) && (
                                     <tr>
-                                        <td colSpan="3" className="text-center py-6 text-gray-400 text-sm">No products added yet</td>
+                                        <td colSpan="3" className="text-center py-12 text-[10px] font-black uppercase tracking-widest text-black/10">Archive is empty</td>
                                     </tr>
                                 )}
                             </tbody>

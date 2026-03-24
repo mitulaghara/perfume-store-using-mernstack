@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
-import { Plus, Filter, SlidersHorizontal, Heart } from 'lucide-react';
+import { Plus, Filter, SlidersHorizontal, Heart, Star } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProductSkeleton from '../components/ProductSkeleton';
 
@@ -71,118 +71,121 @@ const Shop = () => {
     };
 
     return (
-        <div className="pt-28 pb-12 container mx-auto px-6">
-            <div className="mb-8">
-                <h1 className="text-4xl font-extrabold text-dark mb-2">Shop All Products</h1>
-                <p className="text-gray-500">Browse our complete collection</p>
-            </div>
+        <div className="pt-40 pb-20 bg-white min-h-screen">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col items-center text-center mb-20 space-y-4">
+                    <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40">The Collection</p>
+                    <h1 className="text-5xl font-serif">Curated <span className="italic">Fragments</span></h1>
+                </div>
 
-            {/* Filters */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-                    <div className="flex items-center space-x-4">
-                        <Filter className="w-5 h-5 text-gray-400" />
-                        <div className="flex flex-wrap gap-2">
-                            {categories.map(cat => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setSelectedCategory(cat)}
-                                    className={`px-4 py-2 rounded-full font-medium transition ${selectedCategory === cat
-                                        ? 'bg-primary text-white'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                        }`}
-                                >
-                                    {cat}
-                                </button>
-                            ))}
-                        </div>
+                {/* Filters */}
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-8 border-b border-black/5 pb-8">
+                    <div className="flex flex-wrap items-center gap-4">
+                        {categories.map(cat => (
+                            <button
+                                key={cat}
+                                onClick={() => setSelectedCategory(cat)}
+                                className={`text-[10px] uppercase tracking-widest px-6 py-2.5 font-black border transition-all ${selectedCategory === cat
+                                    ? 'bg-black text-white border-black'
+                                    : 'bg-white text-black/40 border-black/5 hover:border-black hover:text-black'
+                                    }`}
+                            >
+                                {cat}
+                            </button>
+                        ))}
                     </div>
 
-                    <div className="flex items-center space-x-3">
-                        <SlidersHorizontal className="w-5 h-5 text-gray-400" />
+                    <div className="flex items-center space-x-4">
+                        <span className="text-[10px] uppercase tracking-widest font-black text-black/40">Sort By</span>
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className="px-4 py-2 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-primary/20 bg-white"
+                            className="text-[10px] uppercase tracking-widest font-black px-4 py-2 border border-black/5 focus:border-black outline-none bg-white cursor-pointer"
                         >
-                            <option value="default">Sort By</option>
+                            <option value="default">Default</option>
                             <option value="price-low">Price: Low to High</option>
                             <option value="price-high">Price: High to Low</option>
-                            <option value="name">Name: A to Z</option>
+                            <option value="name">Alphabetical</option>
                         </select>
                     </div>
                 </div>
-            </div>
 
-            {/* Products Grid */}
-            {!loading && (
-                <div className="mb-6 text-gray-600">
-                    Showing <span className="font-bold text-dark">{filteredProducts.length}</span> products
-                </div>
-            )}
+                {!loading && (
+                    <div className="mb-12 text-[10px] uppercase tracking-[0.2em] font-black text-black/20">
+                        Archive / <span className="text-black">{filteredProducts.length} items</span>
+                    </div>
+                )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {loading ? (
-                    <ProductSkeleton count={8} />
-                ) : (
-                    filteredProducts.map((product) => {
-                        const inWishlist = isInWishlist(product._id);
-                        return (
-                            <div key={product._id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl product-card border border-gray-100 group relative">
-                                <Link to={`/product/${product._id}`} className="block relative h-64 overflow-hidden">
-                                    <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-xs font-bold">
-                                        {product.stock} in stock
-                                    </div>
-                                </Link>
-
-                                <div className="absolute bottom-32 right-4 flex flex-col space-y-2 z-20">
-                                    <button
-                                        onClick={() => inWishlist ? removeFromWishlist(product._id) : addToWishlist(product)}
-                                        className={`p-3 rounded-full shadow-lg transition-colors ${inWishlist ? 'bg-red-50 text-red-500' : 'bg-white text-gray-400 hover:text-red-500'}`}
-                                        title={inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
-                                    >
-                                        <Heart className={`w-5 h-5 ${inWishlist ? 'fill-current' : ''}`} />
-                                    </button>
-                                    <button
-                                        onClick={() => addToCart(product)}
-                                        className="bg-white p-3 rounded-full shadow-lg text-primary hover:bg-primary hover:text-white transition-colors"
-                                        title="Add to Cart"
-                                    >
-                                        <Plus className="w-6 h-6" />
-                                    </button>
-                                </div>
-
-                                <div className="p-6">
-                                    <span className="text-xs text-secondary font-bold uppercase tracking-wider">{product.category}</span>
-                                    <Link to={`/product/${product._id}`}>
-                                        <h3 className="text-lg font-bold text-dark mt-2 mb-1 hover:text-primary transition-colors">{product.name}</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+                    {loading ? (
+                        <ProductSkeleton count={8} />
+                    ) : (
+                        filteredProducts.map((product) => {
+                            const inWishlist = isInWishlist(product._id);
+                            return (
+                                <div key={product._id} className="group relative flex flex-col space-y-6 animate-fadeIn">
+                                    <Link to={`/product/${product._id}`} className="block relative aspect-[4/5] bg-white overflow-hidden border border-black/5 group-hover:border-black transition-colors duration-500">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-90 group-hover:opacity-100"
+                                        />
+                                        <div className="absolute top-4 left-4 bg-black text-white px-3 py-1 text-[8px] font-black uppercase tracking-widest">
+                                            {product.category}
+                                        </div>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                inWishlist ? removeFromWishlist(product._id) : addToWishlist(product);
+                                            }}
+                                            className={`absolute top-4 right-4 p-2 transition-all duration-300 bg-white/50 backdrop-blur-md opacity-0 group-hover:opacity-100 ${inWishlist ? 'text-red-600' : 'text-black hover:scale-125'}`}
+                                        >
+                                            <Heart className={`w-4 h-4 ${inWishlist ? 'fill-current' : ''}`} />
+                                        </button>
                                     </Link>
-                                    <p className="text-gray-500 text-sm mb-3 line-clamp-2">{product.description}</p>
-                                    <div className="flex justify-between items-center mt-4">
-                                        <div>
-                                            {product.regularPrice && product.sellPrice && product.regularPrice > product.sellPrice ? (
-                                                <>
-                                                    <span className="text-xs text-gray-400 line-through block">₹{product.regularPrice}</span>
-                                                    <span className="text-xl font-extrabold text-dark">₹{product.sellPrice}</span>
-                                                </>
-                                            ) : (
-                                                <span className="text-xl font-extrabold text-dark">₹{product.sellPrice || product.price}</span>
-                                            )}
+
+                                    <div className="space-y-4">
+                                        <div className="space-y-1">
+                                            <Link to={`/product/${product._id}`}>
+                                                <h3 className="font-serif text-xl group-hover:italic transition-all duration-300">{product.name}</h3>
+                                            </Link>
+                                            <div className="flex items-center gap-2 opacity-40">
+                                                <Star className="w-3 h-3 fill-black" />
+                                                <span className="text-[10px] font-bold tracking-widest uppercase">4.8 / 5.0</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center justify-between border-t border-black/5 pt-4">
+                                            <div className="flex flex-col">
+                                                {product.regularPrice && product.sellPrice && product.regularPrice > product.sellPrice ? (
+                                                    <>
+                                                        <span className="text-[10px] text-black/20 line-through">₹{product.regularPrice}</span>
+                                                        <span className="text-lg font-bold tracking-tight">₹{product.sellPrice}</span>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-lg font-bold tracking-tight">₹{product.sellPrice || product.price}</span>
+                                                )}
+                                            </div>
+                                            <button
+                                                onClick={() => addToCart(product)}
+                                                className="text-[10px] font-black uppercase tracking-widest hover:underline"
+                                            >
+                                                Add to Cart
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })
+                            );
+                        })
+                    )}
+                </div>
+
+                {!loading && filteredProducts.length === 0 && (
+                    <div className="text-center py-32 border border-black/5 border-dashed">
+                        <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/20">The collection is currently empty for this category</p>
+                    </div>
                 )}
             </div>
-
-            {!loading && filteredProducts.length === 0 && (
-                <div className="text-center py-16">
-                    <p className="text-gray-400 text-lg">No products found in this category</p>
-                </div>
-            )}
         </div>
     );
 };

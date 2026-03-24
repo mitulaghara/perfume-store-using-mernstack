@@ -1,135 +1,77 @@
-# 🛍️ Mitul's Market - Premium E-Commerce Experience
+# LUXE Fragrance Boutique - High-End E-Commerce
 
-[![Status](https://img.shields.io/badge/Status-Ultra--Attractive-brightgreen)](https://github.com/mitulaghara/Mitul-s-Market-E-Commerce)
-[![Live Demo](https://img.shields.io/badge/Demo-Live-blue)](http://localhost:5173)
+A luxury, minimalist monochrome e-commerce platform for curated perfume fragments. This application features a boutique user interface, advanced cart management, and a robust administrative panel for inventory and order oversight.
 
-Welcome to **Mitul's Market**, a high-end, full-stack e-commerce platform designed for a premium shopping experience. Featuring an ultra-attractive UI, real-time interactions, and a seamless checkout flow.
+## 💎 Design Philosophy
+- **Boutique Aesthetic**: A high-contrast, black-and-white visual identity inspired by luxury editorial design.
+- **Editorial Typography**: Utilizing serif headers (`Playfair Display`) and minimalist tracking-heavy sans-serif labels (`Inter`).
+- **Seamless Interaction**: Glassmorphism navigation, balanced spacing, and subtle micro-animations for a premium feel.
 
----
+## 🚀 Technology Stack
+### Frontend
+- **React.js**: Modern component-based architecture.
+- **Tailwind CSS**: Custom utility-first styling with a bespoke design system.
+- **Lucide React**: Minimalist iconography.
+- **Vite**: Ultra-fast development and build environment.
 
-## ✨ Features
+### Backend
+- **Node.js & Express**: Scalable server-side logic and RESTful API.
+- **MongoDB**: Flexible NoSQL database for product and order management.
+- **Socket.io**: Real-time order processing and status synchronization.
 
-### 🎨 **Ultra-Premium UI/UX**
-- **Sleek Hero Section**: Animated gradients, glassmorphism cards, and floating elements.
-- **Smart User Avatars**: Auto-generated, consistent avatars based on user initials - no more broken images!
-- **Micro-Animations**: Shimmer effects, pulse glows, and smooth transitions.
-- **Responsive Design**: Optimized for Mobile, Tablet, and Desktop.
-- **Enhanced Profile**: Personal dashboard with wishlist management and editable details.
+## 🛠️ Features
+### Client Side
+- **Curated Archive**: Minimalist shop interface with advanced filtering.
+- **Detailed Profiles**: Fragment specifications and olfactory descriptions.
+- **Secure Checkout**: Streamlined cart and membership management.
+- **Order Manifests**: Real-time tracking and logistical information.
 
-### 🔍 **Smart Discovery**
-- **Real-time Search**: Instant product suggestions with thumbnails and pricing as you type.
-- **Category Filters**: Easily browse through Electronics, Fashion, and more.
-- **Featured Collections**: Handpicked products with dynamic hover effects.
+### Admin Terminal
+- **Inventory Oversight**: Complete control over product archiving and deployment.
+- **Order Command**: Real-time manifest monitoring and status processing.
+- **Analytical Dashboard**: Overview of boutique performance metrics.
 
-### 🛒 **Advanced Shopping Flow**
-- **Seamless Cart**: Real-time cart updates with tax (GST) and shipping calculations.
-- **Order Tracking**: Comprehensive order status updates via Socket.io.
-- **Secure Checkout**: Streamlined process for a faster conversion.
+## 📦 Getting Started
 
-### 🛡️ Admin Access
-- **Role-based Redirection**: Automatic redirection to the admin dashboard for authorized users upon login.
-- **Dynamic Meta Updates**: The browser tab title and favicon change dynamically (Shield icon for Admin, Cart icon for Store) to clearly distinguish between roles.
-- **Dashboard Overview**: Real-time stats for revenue, orders, and inventory.
-- **Product Management**: Complete CRUD capabilities for your inventory.
-- **Bulk Operations**: Select and delete multiple orders at once with ease.
-
-### ✨ **Visual & Security Upgrades**
-- **Dynamic UI**: Browser tabs and icons update in real-time based on the route.
-- **Elegant Splash Screen**: A premium, "no-wave" entry animation for a sophisticated feel.
-- **Enhanced Security**: Robust JWT authentication and role-protected routes.
-
-### ⚙️ **Developer Friendly**
-- **Admin Seeding**: Built-in script (`seedAdmin.js`) to quickly set up admin credentials.
-- **Clean Codebase**: Modular React components and organized Express backend.
-- **Real-time Engine**: Powered by Socket.io for instant updates.
-
----
-
-## 🛠️ Tech Stack
-
-- **Frontend**: [React.js](https://reactjs.org/), [Vite](https://vitejs.dev/), [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- **Backend**: [Node.js](https://nodejs.org/), [Express.js](https://expressjs.com/)
-- **Database**: [MongoDB](https://www.mongodb.com/) (Mongoose)
-- **Real-time**: [Socket.io](https://socket.io/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
+### 1. Requirements
 - Node.js (v18+)
-- MongoDB (Local or Atlas)
+- MongoDB (Running locally or via Atlas)
 
-### Installation
+### 2. Installation
+```bash
+# Clone the repository
+git clone https://github.com/mitulaghara/perfume-store-using-mernstack.git
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/mitulaghara/Mitul-s-Market-E-Commerce.git
-   cd Mitul-s-Market-E-Commerce
-   ```
+# Install Core dependencies
+cd perfume-store
+npm install
 
-2. **Setup Backend**
-   ```bash
-   cd server
-   npm install
-   ```
-   Create a `.env` file in the `server` directory:
-   ```env
-   PORT=5001
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   ```
+# Setup Client
+cd client
+npm install
 
-3. **Setup Frontend**
-   ```bash
-   cd ../client
-   npm install
-   ```
-
-### Running Locally
-
-1. **Start Server**
-   ```bash
-   cd server
-   npm run dev
-   ```
-
-2. **Start Client**
-   ```bash
-   cd client
-   npm run dev
-   ```
-
-The application will be available at `http://localhost:5173`.
-
----
-
-## 📦 Project Structure
-
-```text
-├── client/          # React frontend application
-│   ├── src/
-│   │   ├── components/  # Reusable UI elements
-│   │   ├── pages/       # Page components (Home, Shop, Cart, etc.)
-│   │   └── context/     # State management
-├── server/          # Node.js backend API
-│   ├── models/      # Mongoose schemas
-│   ├── routes/      # Express API routes
-│   └── index.js     # Entry point
-└── README.md        # Project documentation
+# Setup Server
+cd ../server
+npm install
 ```
 
----
+### 3. Execution
+```bash
+# Start the Server (from /server)
+npm start
 
-## 🤝 Contributing
+# Start the Client (from /client)
+npm run dev
+```
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+## 🔐 Credentials
+### Admin Access
+- **Email**: `admin@gmail.com`
+- **Password**: `123456`
 
-## 📄 License
+### Client Access
+- **Email**: `bhavit@gmail.com`
+- **Password**: `123456`
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-<p align="center">Made with ❤️ by <b>Mitul Aghara</b></p>
+## 📄 Licensing
+Exclusive distribution for the Luxe Fragrance Boutique brand.

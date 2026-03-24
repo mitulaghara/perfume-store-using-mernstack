@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -37,76 +37,82 @@ const AuthPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-2xl animate-fadeIn">
-                <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 gradient-text">
-                        {isLogin ? 'Sign in to your account' : 'Create new account'}
+        <div className="min-h-screen flex items-center justify-center bg-white py-24 px-6 md:px-12">
+            <div className="max-w-md w-full space-y-12 animate-fadeIn">
+                <div className="text-center space-y-4">
+                    <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40">Perfume Store</p>
+                    <h2 className="text-4xl font-serif">
+                        {isLogin ? 'Welcome back.' : 'Join the elite.'}
                     </h2>
+                    <p className="text-xs text-black/40 uppercase tracking-widest font-bold">
+                        {isLogin ? 'Sign in to access your curated selection' : 'Create an account to begin your journey'}
+                    </p>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                    <div className="rounded-md shadow-sm -space-y-px">
+
+                <form className="space-y-8" onSubmit={handleSubmit}>
+                    <div className="space-y-4">
                         {!isLogin && (
-                            <div>
-                                <label htmlFor="name" className="sr-only">Name</label>
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-widest font-black text-black/40 ml-1">Full Name</label>
                                 <input
-                                    id="name"
                                     name="name"
                                     type="text"
                                     required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Full Name"
+                                    className="w-full px-4 py-3 border-b border-black/5 focus:border-black outline-none transition-all font-medium text-sm"
+                                    placeholder="Jane Doe"
                                     value={formData.name}
                                     onChange={handleChange}
                                 />
                             </div>
                         )}
-                        <div>
-                            <label htmlFor="email-address" className="sr-only">Email address</label>
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-widest font-black text-black/40 ml-1">Email</label>
                             <input
-                                id="email-address"
                                 name="email"
                                 type="email"
                                 required
-                                className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 ${isLogin ? 'rounded-t-md' : ''} focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
-                                placeholder="Email address"
+                                className="w-full px-4 py-3 border-b border-black/5 focus:border-black outline-none transition-all font-medium text-sm"
+                                placeholder="name@domain.com"
                                 value={formData.email}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
-                            <label htmlFor="password" className="sr-only">Password</label>
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-widest font-black text-black/40 ml-1">Password</label>
                             <input
-                                id="password"
                                 name="password"
                                 type="password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Password"
+                                className="w-full px-4 py-3 border-b border-black/5 focus:border-black outline-none transition-all font-medium text-sm"
+                                placeholder="••••••••"
                                 value={formData.password}
                                 onChange={handleChange}
                             />
                         </div>
                     </div>
 
-                    {error && <div className="text-red-500 text-sm text-center">{error}</div>}
+                    {error && <div className="text-red-600 text-[10px] border border-red-100 bg-red-50 p-3 font-bold uppercase tracking-wider text-center">{error}</div>}
 
-                    <div>
-                        <button
-                            type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105"
-                        >
-                            {isLogin ? 'Sign in' : 'Sign up'}
-                        </button>
-                    </div>
+                    <button
+                        type="submit"
+                        className="monochrome-btn w-full"
+                    >
+                        {isLogin ? 'Sign In' : 'Sign Up'}
+                    </button>
                 </form>
+
                 <div className="text-center">
                     <button
-                        className="text-indigo-600 hover:text-indigo-500 font-medium"
+                        className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40 hover:text-black transition-colors"
                         onClick={() => setIsLogin(!isLogin)}
                     >
-                        {isLogin ? 'Need an account? Sign up' : 'Already have an account? Sign in'}
+                        {isLogin ? 'Create Account' : 'Back to Login'}
                     </button>
+                    <div className="mt-8">
+                        <Link to="/" className="text-[10px] font-black uppercase tracking-[0.2em] text-black/20 hover:text-black transition-colors">
+                            Return to Store
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

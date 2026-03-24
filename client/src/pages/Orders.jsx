@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import socket from '../lib/socket';
-import { Package } from 'lucide-react';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { Package, Clock, XCircle, CheckCircle } from 'lucide-react';
 
 import { useAuth } from '../context/AuthContext';
 
@@ -15,11 +14,6 @@ const Orders = () => {
 
     useEffect(() => {
         if (token) fetchOrders();
-
-        socket.on('newResults', (data) => {
-            // Notification sound or alert could go here
-            console.log(data.message);
-        });
 
         socket.on('orderUpdate', (updatedOrder) => {
             setOrders(prevOrders => {
@@ -35,7 +29,6 @@ const Orders = () => {
         });
 
         return () => {
-            socket.off('newResults');
             socket.off('orderUpdate');
         };
     }, [token]);
@@ -55,45 +48,56 @@ const Orders = () => {
     };
 
     const handleCancelOrder = async (orderId) => {
-        if (!window.confirm("Are you sure you want to cancel this order?")) return;
+        if (!window.confirm("Abort this transmission?")) return;
         try {
             await axios.put(`http://localhost:5001/api/orders/${orderId}/cancel`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            alert("Order Cancelled Successfully");
             fetchOrders();
         } catch (err) {
             console.error(err);
-            alert("Failed to cancel order");
         }
     };
 
+    if (loading) return (
+        <div className="min-h-screen flex items-center justify-center bg-white">
+            <div className="w-12 h-12 border-t-2 border-black rounded-full animate-spin"></div>
+        </div>
+    );
+
     return (
-        <div className="pt-28 pb-12 container mx-auto px-6 max-w-5xl">
-            <h1 className="text-3xl font-bold text-dark mb-8">My Orders</h1>
-            {loading ? (
-                <LoadingSpinner message="Loading your orders..." />
-            ) : (
-                <div className="space-y-4">
+        <div className="pt-40 pb-20 bg-white min-h-screen">
+            <div className="container mx-auto px-6 max-w-5xl">
+                <div className="flex flex-col items-center text-center mb-20 space-y-4">
+                    <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40">History</p>
+                    <h1 className="text-5xl font-serif">Order <span className="italic">Archive</span></h1>
+                </div>
+
+                <div className="space-y-8">
                     {orders.map((order) => (
-                        <div key={order._id} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between md:items-center">
-                            <div className="mb-4 md:mb-0">
-                                <div className="flex items-center space-x-3 mb-2">
-                                    <Package className="text-primary w-5 h-5" />
-                                    <span className="font-bold text-dark">Order #{order._id.slice(-6).toUpperCase()}</span>
-                                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${order.status === 'Pending' ? 'bg-yellow-100 text-yellow-600' :
-                                        order.status === 'Cancelled' ? 'bg-red-100 text-red-600' :
-                                            order.status === 'Completed' ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'
+                        <div key={order._id} className="group bg-white border border-black/5 p-8 flex flex-col md:flex-row justify-between md:items-center hover:border-black transition-all animate-fadeIn">
+                            <div className="space-y-6">
+                                <div className="flex items-center gap-6">
+                                    <div className="opacity-20"><Package className="w-5 h-5" /></div>
+                                    <span className="text-[10px] font-black uppercase tracking-[0.2em]">Transaction #{order._id.slice(-6).toUpperCase()}</span>
+                                    <span className={`px-4 py-1 text-[8px] font-black uppercase tracking-[0.2em] border ${order.status === 'Pending' ? 'border-black/10 text-black/40' :
+                                        order.status === 'Cancelled' ? 'border-red-100 text-red-600' :
+                                            'border-black text-black'
                                         }`}>
                                         {order.status}
                                     </span>
                                 </div>
-                                <p className="text-gray-500 text-sm">{new Date(order.createdAt).toLocaleString()} • {order.products ? order.products.length : 0} Items</p>
+                                
+                                <div className="flex flex-col gap-1">
+                                    <p className="text-[10px] text-black/40 font-bold uppercase tracking-widest">
+                                        {new Date(order.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })} • {order.products ? order.products.length : 0} Fragments
+                                    </p>
+                                </div>
 
                                 {/* Product Thumbnails */}
-                                <div className="flex -space-x-3 mt-4 overflow-hidden">
+                                <div className="flex gap-4 overflow-hidden pt-2">
                                     {order.products?.map((item, idx) => (
-                                        <div key={idx} className="inline-block h-10 w-10 rounded-full border-2 border-white bg-gray-100 overflow-hidden shadow-sm" title={item.productId?.name}>
+                                        <div key={idx} className="w-10 h-14 border border-black/5 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700" title={item.productId?.name}>
                                             <img
                                                 src={item.productId?.image || item.productId?.images?.[0]}
                                                 alt=""
@@ -102,40 +106,39 @@ const Orders = () => {
                                         </div>
                                     ))}
                                 </div>
-                                {order.products?.length === 1 && (
-                                    <p className="text-xs text-gray-400 mt-2 font-medium">{order.products[0].productId?.name}</p>
-                                )}
                             </div>
-                            <div className="text-right flex flex-col items-end justify-between py-1">
+                            
+                            <div className="text-left md:text-right flex flex-col items-start md:items-end gap-6 mt-8 md:mt-0">
                                 <div>
-                                    <span className="block text-2xl font-bold text-primary">₹{order.totalAmount}</span>
-                                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{order.paymentMethod === 'cod' ? 'Cash on Delivery' : 'Online'}</span>
+                                    <span className="block text-3xl font-bold tracking-tighter">₹{order.totalAmount}</span>
+                                    <span className="text-[8px] text-black/20 font-black uppercase tracking-[0.3em] font-bold mt-1 block">Prot: {order.paymentMethod === 'cod' ? 'Deferred' : 'Digital'}</span>
                                 </div>
                                 {order.status === 'Pending' && (
                                     <button
                                         onClick={() => handleCancelOrder(order._id)}
-                                        className="px-4 py-1.5 rounded-lg border border-red-200 text-red-600 text-xs font-bold hover:bg-red-50 transition-colors mt-4"
+                                        className="text-[10px] font-black uppercase tracking-[0.2em] text-red-600/40 hover:text-red-600 transition-colors"
                                     >
-                                        Cancel Order
+                                        Abort Order
                                     </button>
                                 )}
                             </div>
                         </div>
                     ))}
+                    
                     {orders.length === 0 && (
-                        <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-200">
-                            <Package className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                            <p className="text-gray-500 font-medium">No orders found yet.</p>
+                        <div className="text-center py-32 border border-dashed border-black/10">
+                            <Package className="w-16 h-16 text-black/5 mx-auto mb-8" />
+                            <p className="text-[10px] uppercase tracking-[0.3em] font-black text-black/20 mb-8">No transmissions found in archive.</p>
                             <button
                                 onClick={() => navigate('/shop')}
-                                className="mt-4 text-primary font-bold hover:underline text-sm"
+                                className="monochrome-btn px-12"
                             >
-                                Start Shopping
+                                Begin Collection
                             </button>
                         </div>
                     )}
                 </div>
-            )}
+            </div>
         </div>
     );
 };

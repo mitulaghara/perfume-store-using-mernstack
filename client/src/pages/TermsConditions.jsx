@@ -3,89 +3,85 @@ import { Shield, Book, Gavel, AlertTriangle } from 'lucide-react';
 
 const TermsConditions = () => {
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-12">
+        <div className="min-h-screen bg-white pt-32 pb-20 font-sans">
             <div className="container mx-auto px-6 max-w-4xl">
-                <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div className="bg-white border border-black/5 overflow-hidden shadow-2xl">
                     {/* Header */}
-                    <div className="bg-dark text-white p-8 md:p-12 relative overflow-hidden">
+                    <div className="bg-black text-white p-12 md:p-20 relative overflow-hidden text-center">
+                        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
                         <div className="relative z-10">
-                            <h1 className="text-3xl md:text-4xl font-bold mb-4">Terms & Conditions</h1>
-                            <p className="text-gray-400">
-                                Last Updated: January 1, 2026 <br />
-                                Please read these terms carefully before using our service.
+                            <h1 className="text-4xl md:text-6xl font-serif tracking-tight italic mb-6">Terms <span className="opacity-40">&</span> <span className="text-white/80">Provisions</span></h1>
+                            <p className="text-white/40 text-[10px] uppercase tracking-[0.5em] font-black leading-relaxed">
+                                Latest Authorization: January 1, 2026 <br />
+                                <span className="text-white/20 mt-2 block italic text-[8px]">Please analyze these statutes before engaging with the boutique terminal.</span>
                             </p>
                         </div>
-                        <Shield className="absolute right-[-20px] top-[-20px] w-64 h-64 text-gray-800 opacity-50 rotate-12" />
                     </div>
 
                     {/* Content */}
-                    <div className="p-8 md:p-12 space-y-8">
-                        <div className="prose max-w-none text-gray-600">
-                            <p className="text-lg leading-relaxed mb-8">
-                                Welcome to Perfume Store. By accessing or using our website, you agree to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree with any part of these terms, please do not use our services.
+                    <div className="p-10 md:p-20 space-y-20">
+                        <div className="max-w-none text-black/60">
+                            <p className="text-sm font-black uppercase tracking-[0.2em] leading-loose mb-12 border-l-2 border-black pl-8 italic">
+                                Welcome to the Luxury Perfume Archive. By interfacing with our digital terminal, you acknowledge and agree to be bound by these exhaustive Terms and Conditions and our Privacy Protocol.
                             </p>
                         </div>
 
-                        <section>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <Book className="w-5 h-5 text-primary" />
-                                1. Use of Service
-                            </h2>
-                            <p className="text-gray-600 leading-relaxed mb-4">
-                                You must be at least 18 years old to use this service. You agree to use the website for lawful purposes only and not to engage in any conduct that restricts or inhibits anyone else's use or enjoyment of the website.
+                        <section className="group">
+                            <div className="flex items-center gap-4 mb-8">
+                                <Book className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
+                                <h2 className="text-[11px] font-black uppercase tracking-[0.3em]">1. Operational Mandate</h2>
+                            </div>
+                            <p className="text-black/40 text-[10px] uppercase font-black leading-relaxed tracking-widest mb-6">
+                                Engagement with this boutique is restricted to individuals of legal age (18+). You agree to utilize the terminal for authorized purposes only and to refrain from any conduct that compromises the structural integrity of the service.
                             </p>
                         </section>
 
-                        <section>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <Gavel className="w-5 h-5 text-primary" />
-                                2. Product Information
-                            </h2>
-                            <p className="text-gray-600 leading-relaxed mb-4">
-                                We strive to be as accurate as possible with product descriptions and pricing. However, we do not warrant that product descriptions or other content are accurate, complete, reliable, current, or error-free.
+                        <section className="group">
+                            <div className="flex items-center gap-4 mb-8">
+                                <Gavel className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
+                                <h2 className="text-[11px] font-black uppercase tracking-[0.3em]">2. Fragment Representation</h2>
+                            </div>
+                            <p className="text-black/40 text-[10px] uppercase font-black leading-relaxed tracking-widest mb-8">
+                                We maintain rigorous accuracy regarding fragment compositions and value representation. However, we do not warrant that descriptions are absolute, infallible, or entirely current.
                             </p>
-                            <ul className="list-disc pl-6 space-y-2 text-gray-600 text-sm">
-                                <li>Prices are subject to change without notice.</li>
-                                <li>We reserve the right to limit quantities purchased per person.</li>
-                                <li>Colors may vary slightly depending on your monitor display.</li>
+                            <ul className="space-y-4 text-[9px] uppercase font-black tracking-[0.2em] text-black border-l border-black/5 pl-8">
+                                <li className="flex items-center gap-4">Values are subject to fluctuation without prior notification.</li>
+                                <li className="flex items-center gap-4">The boutique reserves the right to restrict fragment allocation.</li>
+                                <li className="flex items-center gap-4">Chromatic representation may vary across terminal outputs.</li>
                             </ul>
                         </section>
 
-                        <section>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <AlertTriangle className="w-5 h-5 text-primary" />
-                                3. User Accounts
-                            </h2>
-                            <p className="text-gray-600 leading-relaxed mb-4">
-                                You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account.
+                        <section className="group">
+                            <div className="flex items-center gap-4 mb-8">
+                                <AlertTriangle className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
+                                <h2 className="text-[11px] font-black uppercase tracking-[0.3em]">3. Identity Security</h2>
+                            </div>
+                            <p className="text-black/40 text-[10px] uppercase font-black leading-relaxed tracking-widest mb-6">
+                                Terminal users are solely responsible for the encryption and confidentiality of their authentication tokens. Any activity executed under your credentials remains your legal responsibility.
                             </p>
                         </section>
 
-                        <section>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4">4. Intellectual Property</h2>
-                            <p className="text-gray-600 leading-relaxed mb-4">
-                                All content included on this site, such as text, graphics, logos, images, and software, is the property of Perfume Store or its content suppliers and protected by copyright laws.
+                        <section className="group">
+                            <div className="flex items-center gap-4 mb-8">
+                                <Shield className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
+                                <h2 className="text-[11px] font-black uppercase tracking-[0.3em]">4. Intellectual Sovereignty</h2>
+                            </div>
+                            <p className="text-black/40 text-[10px] uppercase font-black leading-relaxed tracking-widest mb-6">
+                                All assets within this boutique, including visual data, logos, and textual fragments, remain the exclusive property of the Store and are protected under international copyright mandates.
                             </p>
                         </section>
 
-                        <section>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4">5. Limitation of Liability</h2>
-                            <p className="text-gray-600 leading-relaxed mb-4">
-                                Perfume Store shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our services.
+                        <section className="group border-t border-black/5 pt-20">
+                            <h2 className="text-[11px] font-black uppercase tracking-[0.3em] mb-8 italic">5. Limit of Liability</h2>
+                            <p className="text-black/40 text-[10px] uppercase font-black leading-relaxed tracking-widest mb-6">
+                                The Store shall not be held accountable for any direct or indirect consequences resulting from the utilization or failure of terminal services.
                             </p>
                         </section>
 
-                        <section>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4">6. Changes to Terms</h2>
-                            <p className="text-gray-600 leading-relaxed mb-4">
-                                We reserve the right to modify these terms at any time. Your continued use of the site following any changes indicates your acceptance of the new terms.
-                            </p>
-                        </section>
-
-                        <div className="bg-gray-50 border-1 border-gray-200 p-6 rounded-lg mt-8">
-                            <p className="text-gray-700 font-medium mb-2">Contact Us</p>
-                            <p className="text-gray-600 text-sm">
-                                For any questions regarding these Terms & Conditions, please contact us at <span className="font-semibold">support@perfumestore.com</span>.
+                        <div className="bg-black p-12 text-center shadow-xl">
+                            <p className="text-white/20 text-[8px] font-black uppercase tracking-[0.4em] mb-4 font-sans">Liaison Contact</p>
+                            <p className="text-white text-[10px] uppercase tracking-[0.2em] font-black underline hover:text-white/60 transition-colors">
+                                concierge@perfume-store.com
                             </p>
                         </div>
                     </div>

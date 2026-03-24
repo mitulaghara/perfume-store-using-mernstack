@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { CreditCard, Banknote, ShoppingBag, Truck } from 'lucide-react';
+import { CreditCard, Banknote, ShoppingBag, Truck, ChevronRight } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const Checkout = () => {
@@ -12,9 +12,8 @@ const Checkout = () => {
     const navigate = useNavigate();
     const [address, setAddress] = useState(user?.address || '');
     const [loading, setLoading] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState('cod'); // 'cod' or 'online'
+    const [paymentMethod, setPaymentMethod] = useState('cod');
 
-    // Helper to safely parse currency strings
     const parseCurrency = (value) => {
         if (typeof value === 'string') {
             return parseFloat(value.replace(/[^0-9.]/g, '')) || 0;
@@ -22,14 +21,13 @@ const Checkout = () => {
         return Number(value) || 0;
     };
 
-    // Calculate GST and totals safely
-    const GST_RATE = 0.18; // 18% GST
+    const GST_RATE = 0.18;
     const subtotal = cart.reduce((total, item) => total + (parseCurrency(item.price) * item.quantity), 0);
     const gstAmount = Math.round(subtotal * GST_RATE);
     const grandTotal = subtotal + gstAmount;
 
     const handlePlaceOrder = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         setLoading(true);
         try {
             const orderData = {
@@ -54,14 +52,21 @@ const Checkout = () => {
             });
 
             await clearCart();
-            toast.success("Order placed successfully!", {
-                duration: 4000,
-                icon: '🎉',
+            toast.success("Reception Confirmed. Your order is placed.", {
+                style: {
+                    borderRadius: '0px',
+                    background: '#000',
+                    color: '#fff',
+                    fontSize: '10px',
+                    fontWeight: '900',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.2em'
+                }
             });
             navigate('/orders');
         } catch (err) {
             console.error(err);
-            toast.error(err.response?.data?.error || 'Failed to place order. Please try again.');
+            toast.error(err.response?.data?.error || 'Transmission failed. Try again.');
         } finally {
             setLoading(false);
         }
@@ -69,128 +74,123 @@ const Checkout = () => {
 
     if (cart.length === 0) {
         return (
-            <div className="container mx-auto mt-28 text-center px-6 py-12">
-                <div className="bg-white rounded-2xl p-12 shadow-sm border border-gray-100 max-w-lg mx-auto">
-                    <ShoppingBag className="w-24 h-24 mx-auto text-gray-300 mb-6" />
-                    <h2 className="text-3xl font-bold text-dark mb-4">Your cart is empty</h2>
-                    <p className="text-gray-500 mb-8">Add some amazing products to get started!</p>
-                    <button
-                        onClick={() => navigate('/shop')}
-                        className="bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-indigo-700 transition"
-                    >
-                        Continue Shopping
-                    </button>
+            <div className="pt-40 pb-20 flex flex-col items-center justify-center min-h-screen text-center px-6">
+                <div className="mb-12 opacity-10">
+                    <ShoppingBag className="w-32 h-32 text-black" />
                 </div>
+                <h2 className="text-4xl font-serif italic mb-12">Checkout point is empty.</h2>
+                <button
+                    onClick={() => navigate('/shop')}
+                    className="monochrome-btn px-12"
+                >
+                    Return to Collection
+                </button>
             </div>
         );
     }
 
     return (
-        <div className="bg-gray-50 min-h-screen pt-28 pb-12">
+        <div className="bg-white min-h-screen pt-40 pb-20">
             <div className="container mx-auto px-6 max-w-7xl">
-                <div className="mb-8">
-                    <h1 className="text-4xl font-bold text-dark mb-2">Checkout</h1>
-                    <p className="text-gray-500">Review your order and complete payment</p>
+                <div className="flex flex-col items-center text-center mb-20 space-y-4">
+                    <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40">Finalize</p>
+                    <h1 className="text-5xl font-serif">Checkout <span className="italic">Process</span></h1>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24">
                     {/* Left: Shipping & Payment */}
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-2 space-y-20">
                         {/* Shipping Information */}
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                            <h2 className="text-2xl font-bold text-dark mb-6 flex items-center gap-3">
-                                <Truck className="w-6 h-6 text-primary" />
-                                Shipping Information
-                            </h2>
-                            <form onSubmit={handlePlaceOrder} className="space-y-4">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                                        <input
-                                            type="text"
-                                            value={user?.name}
-                                            disabled
-                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-600"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                                        <input
-                                            type="email"
-                                            value={user?.email}
-                                            disabled
-                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-600"
-                                        />
-                                    </div>
+                        <div className="space-y-10">
+                            <div className="flex items-center gap-6">
+                                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-black">01</p>
+                                <h2 className="text-xl font-serif italic border-b border-black/5 pb-2 flex-1">
+                                    Shipping Destination
+                                </h2>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                <div className="space-y-1">
+                                    <label className="text-[10px] uppercase tracking-widest font-black text-black/40 ml-1">Recipient</label>
+                                    <input
+                                        type="text"
+                                        value={user?.name}
+                                        disabled
+                                        className="w-full px-4 py-3 border-b border-black/5 bg-transparent text-black/40 font-medium text-sm outline-none cursor-not-allowed"
+                                    />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Shipping Address *</label>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] uppercase tracking-widest font-black text-black/40 ml-1">Contact Email</label>
+                                    <input
+                                        type="email"
+                                        value={user?.email}
+                                        disabled
+                                        className="w-full px-4 py-3 border-b border-black/5 bg-transparent text-black/40 font-medium text-sm outline-none cursor-not-allowed"
+                                    />
+                                </div>
+                                <div className="md:col-span-2 space-y-1">
+                                    <label className="text-[10px] uppercase tracking-widest font-black text-black/40 ml-1">Archive Location (Shipping Address)</label>
                                     <textarea
                                         required
                                         value={address}
                                         onChange={(e) => setAddress(e.target.value)}
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                        rows="4"
-                                        placeholder="Enter your complete shipping address with pin code"
+                                        className="w-full px-4 py-3 border-b border-black/5 focus:border-black bg-transparent text-black font-medium text-sm outline-none transition-all placeholder:text-black/10"
+                                        rows="3"
+                                        placeholder="Full address, City, State, Zip"
                                     ></textarea>
                                 </div>
-                            </form>
+                            </div>
                         </div>
 
                         {/* Payment Method */}
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                            <h2 className="text-2xl font-bold text-dark mb-6 flex items-center gap-3">
-                                <CreditCard className="w-6 h-6 text-primary" />
-                                Payment Method
-                            </h2>
-                            <div className="space-y-4">
+                        <div className="space-y-10">
+                            <div className="flex items-center gap-6">
+                                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-black">02</p>
+                                <h2 className="text-xl font-serif italic border-b border-black/5 pb-2 flex-1">
+                                    Protocol of Payment
+                                </h2>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div
                                     onClick={() => setPaymentMethod('cod')}
-                                    className={`p-6 border-2 rounded-xl cursor-pointer transition-all ${paymentMethod === 'cod'
-                                        ? 'border-primary bg-primary/5'
-                                        : 'border-gray-200 hover:border-gray-300'
+                                    className={`group p-8 border transition-all cursor-pointer ${paymentMethod === 'cod'
+                                        ? 'border-black bg-black text-white'
+                                        : 'border-black/5 hover:border-black/20 text-black'
                                         }`}
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${paymentMethod === 'cod' ? 'border-primary' : 'border-gray-300'
-                                            }`}>
-                                            {paymentMethod === 'cod' && <div className="w-3 h-3 rounded-full bg-primary"></div>}
+                                    <div className="flex flex-col h-full justify-between gap-8">
+                                        <div className="flex justify-between items-start">
+                                            <Banknote className="w-8 h-8 opacity-20" />
+                                            <div className={`w-3 h-3 border rounded-full ${paymentMethod === 'cod' ? 'bg-white border-white' : 'border-black/20'}`}></div>
                                         </div>
-                                        <Banknote className="w-8 h-8 text-green-600" />
-                                        <div className="flex-1">
-                                            <h3 className="font-bold text-dark">Cash on Delivery</h3>
-                                            <p className="text-sm text-gray-500">Pay when you receive your order</p>
+                                        <div>
+                                            <h3 className="text-sm font-black uppercase tracking-widest mb-2">Deferred Payment</h3>
+                                            <p className={`text-[10px] uppercase tracking-wider font-bold ${paymentMethod === 'cod' ? 'text-white/40' : 'text-black/40'}`}>
+                                                Cash on Arrival
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div
                                     onClick={() => {
-                                        toast("Payment Gateway Coming Soon!", {
-                                            icon: '🚀',
-                                            style: {
-                                                borderRadius: '10px',
-                                                background: '#333',
-                                                color: '#fff',
-                                            },
-                                        });
-                                        toast.error("Online payment is temporarily unavailable. Please select Cash on Delivery to proceed with your order.", {
-                                            duration: 5000,
+                                        toast("E-Payment Portal Initializing (Coming Soon)", {
+                                            style: { borderRadius: '0', background: '#000', color: '#fff', fontSize: '10px' }
                                         });
                                     }}
-                                    className={`p-6 border-2 rounded-xl cursor-pointer transition-all border-gray-200 opacity-60 hover:bg-gray-50 bg-gray-50 group`}
+                                    className="group p-8 border border-black/5 opacity-40 grayscale cursor-not-allowed space-y-8"
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center border-gray-300`}>
-                                            <div className="w-3 h-3 rounded-full bg-gray-200"></div>
+                                    <div className="flex flex-col h-full justify-between gap-8">
+                                        <div className="flex justify-between items-start">
+                                            <CreditCard className="w-8 h-8 opacity-20" />
+                                            <div className="text-[9px] font-black uppercase tracking-widest text-black border border-black/10 px-2 py-1">SOON</div>
                                         </div>
-                                        <CreditCard className="w-8 h-8 text-gray-400 group-hover:text-blue-500 transition-colors" />
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-2">
-                                                <h3 className="font-bold text-gray-500">Online Payment</h3>
-                                                <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Coming Soon</span>
-                                            </div>
-                                            <p className="text-sm text-gray-400">Pay with UPI, Card, or Net Banking</p>
+                                        <div>
+                                            <h3 className="text-sm font-black uppercase tracking-widest mb-2">Instant Transfer</h3>
+                                            <p className="text-[10px] uppercase tracking-wider font-bold text-black/40">
+                                                Digital Transaction
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -200,57 +200,58 @@ const Checkout = () => {
 
                     {/* Right: Order Summary */}
                     <div className="lg:col-span-1">
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 sticky top-28">
-                            <h2 className="text-2xl font-bold text-dark mb-6">Order Summary</h2>
+                        <div className="bg-white border border-black/5 p-10 sticky top-40 space-y-10">
+                            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-black/40">Collector Statement</h3>
 
                             {/* Cart Items */}
-                            <div className="space-y-4 max-h-64 overflow-y-auto mb-6">
+                            <div className="space-y-6 max-h-48 overflow-y-auto pr-4 scrollbar-thin">
                                 {cart.map(item => (
-                                    <div key={item._id} className="flex gap-4 pb-4 border-b border-gray-100 last:border-0">
-                                        <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-lg" />
-                                        <div className="flex-1">
-                                            <h3 className="font-semibold text-dark text-sm line-clamp-1">{item.name}</h3>
-                                            <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
-                                            <p className="font-bold text-primary text-sm mt-1">₹{parseCurrency(item.price) * item.quantity}</p>
+                                    <div key={item._id} className="flex gap-4 pb-4 border-b border-black/5 last:border-0 last:pb-0">
+                                        <div className="w-12 h-16 border border-black/5 aspect-[3/4] flex-shrink-0">
+                                            <img src={item.image} alt={item.name} className="w-full h-full object-cover grayscale" />
+                                        </div>
+                                        <div className="flex-1 space-y-1">
+                                            <h3 className="text-[10px] font-black uppercase tracking-wider text-black line-clamp-1">{item.name}</h3>
+                                            <p className="text-[9px] text-black/40 font-bold tracking-widest uppercase">Qty: {item.quantity}</p>
+                                            <p className="text-xs font-bold tracking-tighter mt-1">₹{parseCurrency(item.price) * item.quantity}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
                             {/* Price Breakdown */}
-                            <div className="space-y-3 py-4 border-y border-gray-200">
-                                <div className="flex justify-between text-gray-600">
-                                    <span>Subtotal</span>
-                                    <span className="font-semibold">₹{subtotal}</span>
+                            <div className="space-y-6 pt-6 border-t border-black/5">
+                                <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-black/40">
+                                    <span>Base Value</span>
+                                    <span className="text-black">₹{subtotal}</span>
                                 </div>
-                                <div className="flex justify-between text-gray-600">
-                                    <span>GST (18%)</span>
-                                    <span className="font-semibold">₹{gstAmount}</span>
+                                <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-black/40">
+                                    <span>Tax Attribution</span>
+                                    <span className="text-black">₹{gstAmount}</span>
                                 </div>
-                                <div className="flex justify-between text-gray-600">
-                                    <span>Delivery</span>
-                                    <span className="font-semibold text-green-600">FREE</span>
+                                <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-black/40">
+                                    <span>Logistics</span>
+                                    <span className="text-black">Included</span>
+                                </div>
+                                <div className="h-px bg-black/5 my-4"></div>
+                                <div className="flex justify-between items-baseline">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black">Total</span>
+                                    <span className="text-3xl font-bold tracking-tighter text-black">₹{grandTotal}</span>
                                 </div>
                             </div>
 
-                            {/* Grand Total */}
-                            <div className="flex justify-between items-center mt-6 mb-6">
-                                <span className="text-xl font-bold text-dark">Grand Total</span>
-                                <span className="text-2xl font-bold text-primary">₹{grandTotal}</span>
+                            <div className="pt-4">
+                                <button
+                                    onClick={handlePlaceOrder}
+                                    disabled={loading || !address.trim()}
+                                    className="monochrome-btn w-full"
+                                >
+                                    {loading ? 'Transmitting...' : `Place Order`}
+                                </button>
+                                <p className="text-[8px] text-black/20 font-black text-center mt-6 uppercase tracking-[0.2em] leading-relaxed">
+                                    By proceeding, you agree to the <span className="text-black">Curated Terms or Sale</span>
+                                </p>
                             </div>
-
-                            {/* Place Order Button */}
-                            <button
-                                onClick={handlePlaceOrder}
-                                disabled={loading || !address.trim()}
-                                className="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                {loading ? 'Processing...' : `Place Order - ₹${grandTotal}`}
-                            </button>
-
-                            <p className="text-xs text-gray-400 text-center mt-4">
-                                By placing this order, you agree to our Terms & Conditions
-                            </p>
                         </div>
                     </div>
                 </div>

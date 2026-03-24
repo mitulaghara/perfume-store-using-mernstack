@@ -4,55 +4,51 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="bg-dark text-white pt-20 pb-10 border-t border-gray-800">
+        <footer className="bg-black text-white pt-32 pb-16 border-t border-white/5">
             <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
                     {/* Brand Section */}
-                    <div className="space-y-6">
-                        <Link to="/" className="text-3xl font-bold flex items-center gap-2">
-                            <span className="text-primary">Perfume</span>Store
+                    <div className="space-y-8">
+                        <Link to="/" className="text-2xl font-serif font-black tracking-tighter flex items-center">
+                            PERFUME<span className="font-light ml-1">STORE</span>
                         </Link>
-                        <p className="text-gray-400 leading-relaxed text-sm">
-                            Your premium destination for luxury fragrances and designer perfumes. We believe in elegance, style, and exceptional scent experiences.
+                        <p className="text-gray-500 leading-relaxed text-xs uppercase tracking-widest font-bold">
+                            Elevating the essence of identity through artisanal fragrances. Experience the peak of olfactory luxury.
                         </p>
-                        <div className="flex space-x-4">
-                            <a href="https://github.com/mitulaghara" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all duration-300 group">
-                                <Github className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                        <div className="flex space-x-6">
+                            <a href="https://github.com/mitulaghara" className="text-gray-500 hover:text-white transition-all duration-300">
+                                <Github className="w-5 h-5" />
                             </a>
-                            <a href="https://www.instagram.com/mitul_aghara/" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition-all duration-300 group">
-                                <Instagram className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                            <a href="https://www.instagram.com/mitul_aghara/" className="text-gray-500 hover:text-white transition-all duration-300">
+                                <Instagram className="w-5 h-5" />
                             </a>
-                            <a href="https://www.linkedin.com/in/mitul-aghara-602a72332/" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition-all duration-300 group">
-                                <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                            <a href="https://www.linkedin.com/in/mitul-aghara-602a72332/" className="text-gray-500 hover:text-white transition-all duration-300">
+                                <Linkedin className="w-5 h-5" />
                             </a>
                         </div>
                     </div>
 
                     {/* Quick Access */}
                     <div>
-                        <h4 className="text-lg font-bold mb-6 text-white">Quick Access</h4>
-                        <ul className="space-y-4">
+                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-white/40">Collections</h4>
+                        <ul className="space-y-4 text-xs font-bold uppercase tracking-wider">
                             <li>
-                                <Link to="/" className="text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
-                                    <ArrowRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                                <Link to="/" className="text-white/60 hover:text-white transition-colors">
                                     Home
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/shop" className="text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
-                                    <ArrowRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                                <Link to="/shop" className="text-white/60 hover:text-white transition-colors">
                                     Shop Now
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/cart" className="text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
-                                    <ArrowRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                                <Link to="/cart" className="text-white/60 hover:text-white transition-colors">
                                     My Cart
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/orders" className="text-gray-400 hover:text-primary transition-colors flex items-center gap-2 group">
-                                    <ArrowRight className="w-4 h-4 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                                <Link to="/orders" className="text-white/60 hover:text-white transition-colors">
                                     Order History
                                 </Link>
                             </li>
@@ -61,44 +57,44 @@ const Footer = () => {
 
                     {/* Services */}
                     <div>
-                        <h4 className="text-lg font-bold mb-6 text-white">Customer Care</h4>
-                        <ul className="space-y-4">
-                            <li><Link to="/help-center" className="text-gray-400 hover:text-primary transition-colors">Help Center</Link></li>
-                            <li><Link to="/shipping-returns" className="text-gray-400 hover:text-primary transition-colors">Shipping & Returns</Link></li>
-                            <li><Link to="/privacy-policy" className="text-gray-400 hover:text-primary transition-colors">Privacy Policy</Link></li>
-                            <li><Link to="/terms-conditions" className="text-gray-400 hover:text-primary transition-colors">Terms & Conditions</Link></li>
+                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-white/40">Customer Service</h4>
+                        <ul className="space-y-4 text-xs font-bold uppercase tracking-wider">
+                            <li><Link to="/help-center" className="text-white/60 hover:text-white transition-colors">Help Center</Link></li>
+                            <li><Link to="/shipping-returns" className="text-white/60 hover:text-white transition-colors">Shipping & Returns</Link></li>
+                            <li><Link to="/privacy-policy" className="text-white/60 hover:text-white transition-colors">Privacy Policy</Link></li>
+                            <li><Link to="/terms-conditions" className="text-white/60 hover:text-white transition-colors">Terms & Conditions</Link></li>
                         </ul>
                     </div>
 
                     {/* Contact Info */}
                     <div>
-                        <h4 className="text-lg font-bold mb-6 text-white">Contact Us</h4>
-                        <ul className="space-y-4 text-gray-400">
-                            <li className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-primary shrink-0 mt-1" />
-                                <span className="text-sm">Morbi, Gujarat</span>
+                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-white/40">Contact</h4>
+                        <ul className="space-y-6 text-xs font-bold uppercase tracking-wider text-white/60">
+                            <li className="flex items-start gap-4">
+                                <MapPin className="w-4 h-4 opacity-40 shrink-0" />
+                                <span className="tracking-widest">Morbi, Gujarat</span>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Phone className="w-5 h-5 text-primary shrink-0" />
-                                <span className="text-sm">+91 88668 77692</span>
+                            <li className="flex items-center gap-4">
+                                <Phone className="w-4 h-4 opacity-40 shrink-0" />
+                                <span className="tracking-widest">+91 88668 77692</span>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Mail className="w-5 h-5 text-primary shrink-0" />
-                                <span className="text-sm">support@krishamarket.com</span>
+                            <li className="flex items-center gap-4">
+                                <Mail className="w-4 h-4 opacity-40 shrink-0" />
+                                <span className="tracking-widest">support@perfumestore.com</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-gray-800 pt-8 mt-8">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-gray-500 text-sm">
+                <div className="border-t border-white/5 pt-12">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+                        <p className="text-white/20 text-[10px] uppercase font-black tracking-[0.2em]">
                             © {new Date().getFullYear()} Perfume Store. All rights reserved.
                         </p>
-                        <p className="flex items-center gap-1 text-gray-500 text-sm">
-                            Designed with <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" /> by Perfume Store
-                        </p>
+                        <div className="flex items-center gap-8">
+                            <span className="text-white/20 text-[10px] uppercase font-black tracking-[0.2em]">Crafted For Elegance</span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -28,68 +28,64 @@ const HelpCenter = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50 pt-24 pb-12">
+        <div className="min-h-screen bg-white pt-24 pb-20 font-sans">
             {/* Hero Section */}
-            <div className="bg-dark text-white py-16 mb-12">
-                <div className="container mx-auto px-6 text-center">
-                    <h1 className="text-4xl font-bold mb-4">How can we help you?</h1>
-                    <p className="text-gray-400 mb-8">Search for answers or browse our help topics.</p>
-                    <div className="max-w-xl mx-auto relative">
-                        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <div className="bg-black text-white py-24 mb-20 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+                <div className="container mx-auto px-6 text-center relative z-10">
+                    <p className="text-[10px] uppercase tracking-[0.5em] font-black text-white/40 mb-4">Support Concierge</p>
+                    <h1 className="text-5xl font-serif mb-8 italic">How may we <span className="text-white/60">assist you?</span></h1>
+                    <div className="max-w-2xl mx-auto relative group">
+                        <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white/20 w-4 h-4 group-focus-within:text-white transition-colors" />
                         <input
                             type="text"
-                            placeholder="Search for answers..."
-                            className="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                            placeholder="Enter keywords..."
+                            className="w-full pl-16 pr-8 py-5 bg-white/5 border border-white/10 text-white font-medium focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all text-sm tracking-widest uppercase placeholder:text-white/10"
                         />
                     </div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 max-w-6xl">
                 {/* Topic Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group text-center">
-                        <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-100 transition-colors">
-                            <Package className="w-6 h-6 text-blue-600" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-24">
+                    {[
+                        { icon: Package, title: "Orders & Delivery", desc: "Logistics and tracking", delay: "0" },
+                        { icon: CreditCard, title: "Payments & Refunds", desc: "Financial resolutions", delay: "100" },
+                        { icon: RefreshCw, title: "Returns & Exchanges", desc: "Policy and procedure", delay: "200" }
+                    ].map((topic, i) => (
+                        <div key={i} className="group p-10 border border-black/5 hover:border-black transition-all duration-700 cursor-pointer text-center flex flex-col items-center">
+                            <div className="w-16 h-16 border border-black/5 flex items-center justify-center mb-8 group-hover:bg-black group-hover:text-white transition-all duration-500">
+                                <topic.icon className="w-5 h-5 opacity-40 group-hover:opacity-100" />
+                            </div>
+                            <h3 className="text-[11px] font-black uppercase tracking-[0.3em] mb-4">{topic.title}</h3>
+                            <p className="text-[10px] text-black/40 font-bold uppercase tracking-widest">{topic.desc}</p>
                         </div>
-                        <h3 className="text-lg font-semibold mb-2">Orders & Delivery</h3>
-                        <p className="text-gray-500 text-sm">Track packages, edit orders, shipping info</p>
-                    </div>
-                    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group text-center">
-                        <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-100 transition-colors">
-                            <CreditCard className="w-6 h-6 text-green-600" />
-                        </div>
-                        <h3 className="text-lg font-semibold mb-2">Payments & Refunds</h3>
-                        <p className="text-gray-500 text-sm">Payment methods, status, refund processing</p>
-                    </div>
-                    <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group text-center">
-                        <div className="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-100 transition-colors">
-                            <RefreshCw className="w-6 h-6 text-purple-600" />
-                        </div>
-                        <h3 className="text-lg font-semibold mb-2">Returns & Exchanges</h3>
-                        <p className="text-gray-500 text-sm">Return policies, exchange process</p>
-                    </div>
+                    ))}
                 </div>
 
                 {/* FAQs */}
-                <div className="max-w-3xl mx-auto mb-16">
-                    <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-                    <div className="space-y-4">
+                <div className="max-w-3xl mx-auto mb-24">
+                    <div className="text-center mb-16 space-y-2">
+                        <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40">Knowledge Base</p>
+                        <h2 className="text-4xl font-serif">Frequently Asked <span className="italic">Inquiries</span></h2>
+                    </div>
+                    <div className="space-y-6">
                         {faqs.map((faq, index) => (
-                            <div key={index} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                            <div key={index} className="border-b border-black/5 last:border-0">
                                 <button
                                     onClick={() => toggleFaq(index)}
-                                    className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                                    className="w-full py-8 flex items-center justify-between text-left group"
                                 >
-                                    <span className="font-medium text-gray-900">{faq.question}</span>
+                                    <span className="text-[11px] font-black uppercase tracking-[0.2em] group-hover:pl-4 transition-all duration-500">{faq.question}</span>
                                     {openFaq === index ? (
-                                        <ChevronUp className="w-5 h-5 text-gray-500" />
+                                        <ChevronUp className="w-4 h-4 opacity-20" />
                                     ) : (
-                                        <ChevronDown className="w-5 h-5 text-gray-500" />
+                                        <ChevronDown className="w-4 h-4 opacity-20" />
                                     )}
                                 </button>
                                 {openFaq === index && (
-                                    <div className="px-6 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-2">
+                                    <div className="pb-8 text-black/60 text-xs leading-relaxed uppercase tracking-widest font-bold animate-fadeIn">
                                         {faq.answer}
                                     </div>
                                 )}
@@ -99,18 +95,21 @@ const HelpCenter = () => {
                 </div>
 
                 {/* Contact Support */}
-                <div className="bg-primary/5 rounded-2xl p-8 text-center">
-                    <h2 className="text-2xl font-bold mb-4">Still need help?</h2>
-                    <p className="text-gray-600 mb-8">Our support team is available 24/7 to assist you.</p>
-                    <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <button className="flex items-center justify-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-lg font-medium hover:bg-gray-50 transition-colors shadow-sm text-gray-900">
-                            <Mail className="w-5 h-5" />
-                            Email Support
-                        </button>
-                        <button className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors shadow-sm">
-                            <MessageCircle className="w-5 h-5" />
-                            Chat with Us
-                        </button>
+                <div className="bg-black p-16 text-center shadow-2xl relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                    <div className="relative z-10">
+                        <h2 className="text-3xl font-serif text-white mb-6 italic">Unresolved Concerns?</h2>
+                        <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em] mb-12">Our concierge team is at your disposal 24/7</p>
+                        <div className="flex flex-col sm:flex-row justify-center gap-6">
+                            <button className="flex items-center justify-center gap-4 px-10 py-5 bg-transparent border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all">
+                                <Mail className="w-4 h-4" />
+                                Email Dispatch
+                            </button>
+                            <button className="flex items-center justify-center gap-4 px-10 py-5 bg-white text-black text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white/90 transition-all">
+                                <MessageCircle className="w-4 h-4" />
+                                Digital Concierge
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
