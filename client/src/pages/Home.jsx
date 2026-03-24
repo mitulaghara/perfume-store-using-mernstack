@@ -47,10 +47,10 @@ const Home = () => {
     };
 
     const categories = [
-        { name: 'Electronics', icon: Smartphone, color: 'bg-blue-100 text-blue-600' },
-        { name: 'Accessories', icon: Watch, color: 'bg-purple-100 text-purple-600' },
-        { name: 'Audio', icon: Headphones, color: 'bg-pink-100 text-pink-600' },
-        { name: 'Computers', icon: Monitor, color: 'bg-orange-100 text-orange-600' },
+        { name: 'Luxury Perfumes', icon: Sparkles, color: 'bg-gold-100 text-yellow-600' },
+        { name: "Men's Perfumes", icon: Zap, color: 'bg-blue-100 text-blue-600' },
+        { name: "Women's Perfumes", icon: Heart, color: 'bg-pink-100 text-pink-600' },
+        { name: 'Gift Sets', icon: ShoppingBag, color: 'bg-purple-100 text-purple-600' },
     ];
 
     return (
@@ -68,12 +68,12 @@ const Home = () => {
                             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-dark leading-tight">
                                 Discover the <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">
-                                    Future of Tech
+                                    Essence of Luxury
                                 </span>
                             </h1>
 
                             <p className="text-base md:text-xl text-gray-500 max-w-lg leading-relaxed">
-                                Experience innovation at your fingertips. Shop the latest gadgets and accessories with exclusive deals and lightning-fast delivery.
+                                Experience elegance at your fingertips. Shop the latest designer fragrances and exclusive scents with lightning-fast delivery.
                             </p>
 
                             <div className="flex flex-col sm:flex-row flex-wrap gap-4">
@@ -98,8 +98,8 @@ const Home = () => {
                         <div className="relative lg:h-[600px] flex items-center justify-center animate-float">
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-purple-100 rounded-full blur-3xl opacity-60 transform scale-90"></div>
                             <img
-                                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
-                                alt="Hero Product"
+                                src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80"
+                                alt="Hero Perfume"
                                 className="relative z-10 w-full max-w-lg object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
                             />
                             {/* Floating Card */}

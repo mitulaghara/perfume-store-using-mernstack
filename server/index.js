@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
 });
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerce_project')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/perfume-store')
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.error('MongoDB Connection Error:', err));
 
@@ -439,36 +439,44 @@ app.get('/api/seed', async (req, res) => {
 
         const sampleProducts = [
             {
-                name: "Premium Wireless Headphones",
-                description: "High-fidelity sound with noise cancellation.",
-                price: "2999",
-                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
-                category: "Electronics",
+                name: "Luxury Oud Wood",
+                description: "Deep, rich oud wood with notes of cedar and sandalwood.",
+                price: "4999",
+                sellPrice: 4499,
+                regularPrice: 4999,
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80",
+                category: "Luxury Perfumes",
+                stock: 20
+            },
+            {
+                name: "Floral Mist",
+                description: "Light and airy floral fragrance for women.",
+                price: "1599",
+                sellPrice: 1299,
+                regularPrice: 1599,
+                image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&q=80",
+                category: "Women's Perfumes",
                 stock: 50
             },
             {
-                name: "Smart Fitness Watch",
-                description: "Track your health and fitness with style.",
-                price: "1599",
-                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
-                category: "Electronics",
-                stock: 30
-            },
-            {
-                name: "Minimalist Backpack",
-                description: "Durable and stylish backpack for everyday use.",
-                price: "1200",
-                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80",
-                category: "Fashion",
-                stock: 100
-            },
-            {
-                name: "Running Shoes",
-                description: "Comfortable utility shoes for sports.",
+                name: "Oceanic Breeze",
+                description: "Fresh and aquatic scent inspired by the sea.",
                 price: "2499",
-                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80",
-                category: "Fashion",
-                stock: 45
+                sellPrice: 1999,
+                regularPrice: 2499,
+                image: "https://images.unsplash.com/photo-1616950244458-963c0d836371?w=800&q=80",
+                category: "Men's Perfumes",
+                stock: 35
+            },
+            {
+                name: "Golden Amber",
+                description: "Warm and inviting amber fragrance with a hint of vanilla.",
+                price: "3499",
+                sellPrice: 2999,
+                regularPrice: 3499,
+                image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80",
+                category: "Luxury Perfumes",
+                stock: 15
             }
         ];
 

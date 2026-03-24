@@ -16,9 +16,9 @@ const SplashScreen = ({ onComplete }) => {
     return (
         <div className={`splash-screen ${!isVisible ? 'fade-out' : ''}`}>
             <div className="splash-content">
-                <h1 className="brand-title">Mitul's Market</h1>
+                <h1 className="brand-title">Perfume Store</h1>
                 <div className="glow-line"></div>
-                <p className="brand-tagline">Quality • Speed • Trust</p>
+                <p className="brand-tagline">Fragrance • Luxury • Elegance</p>
             </div>
         </div>
     );
