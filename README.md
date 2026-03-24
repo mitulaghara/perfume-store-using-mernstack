@@ -69,9 +69,5 @@ npm run dev
 - **Email**: `admin@gmail.com`
 - **Password**: `123456`
 
-### Client Access
-- **Email**: `bhavit@gmail.com`
-- **Password**: `123456`
-
 ## 📄 Licensing
 Exclusive distribution for the Luxe Fragrance Boutique brand.
