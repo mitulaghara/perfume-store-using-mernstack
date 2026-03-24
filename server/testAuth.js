@@ -7,8 +7,8 @@ const testLogin = async () => {
         await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerce_project');
         console.log('MongoDB Connected');
 
-        const email = 'admin@mitulmarket.com';
-        const password = 'Aghara@2005';
+        const email = 'admin@gmail.com';
+        const password = 'admin123';
 
         const user = await User.findOne({ email });
         if (!user) {
@@ -18,9 +18,9 @@ const testLogin = async () => {
 
         const isMatch = await user.comparePassword(password);
         if (isMatch) {
-            console.log('Login mock success for admin@mitulmarket.com');
+            console.log('Login mock success for admin@gmail.com');
         } else {
-            console.log('Login mock failed for admin@mitulmarket.com');
+            console.log('Login mock failed for admin@gmail.com');
         }
 
         process.exit();

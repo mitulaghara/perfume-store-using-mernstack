@@ -7,8 +7,8 @@ const seedAdmin = async () => {
         await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ecommerce_project');
         console.log('MongoDB Connected');
 
-        const adminEmail = 'admin@mitulmarket.com';
-        const adminPassword = 'Aghara@2005';
+        const adminEmail = 'admin@gmail.com';
+        const adminPassword = 'admin123';
 
         const existingAdmin = await User.findOne({ email: adminEmail });
         if (existingAdmin) {

@@ -67,7 +67,7 @@ npm run dev
 ## 🔐 Credentials
 ### Admin Access
 - **Email**: `admin@gmail.com`
-- **Password**: `123456`
+- **Password**: `admin123`
 
 ## 📄 Licensing
 Exclusive distribution for the Luxe Fragrance Boutique brand.
