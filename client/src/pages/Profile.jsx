@@ -52,19 +52,12 @@ const Profile = () => {
                         <div className="bg-white border border-black/5 p-12 text-center space-y-8 animate-fadeIn">
                             <div className="relative inline-block">
                                 <div className="p-1 border border-black/10 rounded-full scale-110">
-                                    {user?.avatar && !user.avatar.includes('ui-avatars.com') ? (
-                                        <img
-                                            src={user.avatar}
-                                            alt={user?.name}
-                                            className="w-32 h-32 rounded-full object-cover grayscale"
-                                        />
-                                    ) : (
-                                        <div className="w-32 h-32 rounded-full border border-black/5 flex items-center justify-center bg-black/5">
-                                            <User className="w-12 h-12 text-black/20" />
-                                        </div>
-                                    )}
+                                    <UserAvatar 
+                                        name={user?.name} 
+                                        className="w-32 h-32 border border-black/5" 
+                                    />
                                 </div>
-                                <div className="absolute bottom-1 right-1 bg-black w-4 h-4 rounded-full border-2 border-white"></div>
+                                <div className="absolute bottom-1 right-1 bg-green-500 w-5 h-5 rounded-full border-4 border-white shadow-sm"></div>
                             </div>
                             <div>
                                 <h2 className="text-2xl font-serif mb-1">{user?.name}</h2>

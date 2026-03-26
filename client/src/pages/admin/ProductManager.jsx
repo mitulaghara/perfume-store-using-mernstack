@@ -149,7 +149,7 @@ const AdminProducts = () => {
                                 <td className="px-8 py-8">
                                     <div className="flex items-center space-x-6">
                                         <div className="w-12 h-16 border border-black/5 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                                            <img src={product.image} alt="" className="w-full h-full object-cover" />
+                                            <img src={product.image || (product.images && product.images[0]) || 'https://via.placeholder.com/100x150?text=Fragrance'} alt="" className="w-full h-full object-cover" />
                                         </div>
                                         <div className="space-y-1">
                                             <p className="text-[10px] font-black uppercase tracking-wider">{product.name}</p>
@@ -180,7 +180,7 @@ const AdminProducts = () => {
                     <div key={product._id} className="bg-white border border-black/5 p-6 space-y-6">
                         <div className="flex gap-6">
                             <div className="w-20 h-28 border border-black/5 overflow-hidden flex-shrink-0 grayscale">
-                                <img src={product.image} alt="" className="w-full h-full object-cover" />
+                                <img src={product.image || (product.images && product.images[0]) || 'https://via.placeholder.com/200x300?text=Fragrance'} alt="" className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 space-y-2">
                                 <h3 className="text-[10px] font-black uppercase tracking-widest">{product.name}</h3>

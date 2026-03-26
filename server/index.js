@@ -459,16 +459,6 @@ app.get('/api/seed', async (req, res) => {
                 stock: 50
             },
             {
-                name: "Oceanic Breeze",
-                description: "Fresh and aquatic scent inspired by the sea.",
-                price: "2499",
-                sellPrice: 1999,
-                regularPrice: 2499,
-                image: "https://images.unsplash.com/photo-1616950244458-963c0d836371?w=800&q=80",
-                category: "Men's Perfumes",
-                stock: 35
-            },
-            {
                 name: "Golden Amber",
                 description: "Warm and inviting amber fragrance with a hint of vanilla.",
                 price: "3499",

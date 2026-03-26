@@ -79,28 +79,30 @@ const Shop = () => {
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-8 border-b border-black/5 pb-8">
-                    <div className="flex flex-wrap items-center gap-4">
-                        {categories.map(cat => (
-                            <button
-                                key={cat}
-                                onClick={() => setSelectedCategory(cat)}
-                                className={`text-[10px] uppercase tracking-widest px-6 py-2.5 font-black border transition-all ${selectedCategory === cat
-                                    ? 'bg-black text-white border-black'
-                                    : 'bg-white text-black/40 border-black/5 hover:border-black hover:text-black'
-                                    }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 md:mb-16 gap-8 border-b border-black/5 pb-8">
+                    <div className="w-full lg:w-auto overflow-x-auto no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
+                        <div className="flex items-center gap-3 md:gap-4 min-w-max">
+                            {categories.map(cat => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setSelectedCategory(cat)}
+                                    className={`text-[9px] md:text-[10px] uppercase tracking-widest px-5 md:px-6 py-2.5 font-black border transition-all ${selectedCategory === cat
+                                        ? 'bg-black text-white border-black'
+                                        : 'bg-white text-black/40 border-black/5 hover:border-black hover:text-black'
+                                        }`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 w-full lg:w-auto justify-between lg:justify-end">
                         <span className="text-[10px] uppercase tracking-widest font-black text-black/40">Sort By</span>
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value)}
-                            className="text-[10px] uppercase tracking-widest font-black px-4 py-2 border border-black/5 focus:border-black outline-none bg-white cursor-pointer"
+                            className="text-[10px] uppercase tracking-widest font-black px-4 py-2.5 border border-black/5 focus:border-black outline-none bg-white cursor-pointer"
                         >
                             <option value="default">Default</option>
                             <option value="price-low">Price: Low to High</option>
@@ -126,7 +128,7 @@ const Shop = () => {
                                 <div key={product._id} className="group relative flex flex-col space-y-6 animate-fadeIn">
                                     <Link to={`/product/${product._id}`} className="block relative aspect-[4/5] bg-white overflow-hidden border border-black/5 group-hover:border-black transition-colors duration-500">
                                         <img
-                                            src={product.image}
+                                            src={product.image || (product.images && product.images[0]) || 'https://via.placeholder.com/400x500?text=Fragrance'}
                                             alt={product.name}
                                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-90 group-hover:opacity-100"
                                         />

@@ -54,10 +54,10 @@ const Cart = () => {
 
                 <div className="grid lg:grid-cols-3 gap-16">
                     {/* Cart Items */}
-                    <div className="lg:col-span-2 space-y-12">
+                    <div className="lg:col-span-2 space-y-8 md:space-y-12">
                         {cart.map((item) => (
-                            <div key={item._id} className="group relative flex flex-col sm:flex-row items-center gap-8 pb-12 border-b border-black/5 last:border-0 animate-fadeIn">
-                                <div className="w-full sm:w-40 aspect-[3/4] overflow-hidden border border-black/5 group-hover:border-black transition-all">
+                            <div key={item._id} className="group relative flex flex-col sm:flex-row items-center gap-6 md:gap-8 pb-8 md:pb-12 border-b border-black/5 last:border-0 animate-fadeIn">
+                                <div className="w-32 sm:w-40 aspect-[3/4] overflow-hidden border border-black/5 group-hover:border-black transition-all flex-shrink-0">
                                     <img
                                         src={item.image}
                                         alt={item.name}
@@ -65,34 +65,34 @@ const Cart = () => {
                                     />
                                 </div>
                                 <div className="flex-1 space-y-4 w-full text-center sm:text-left">
-                                    <div>
-                                        <p className="text-[10px] uppercase tracking-[0.2em] font-black text-black/40 mb-1">{item.category}</p>
-                                        <h3 className="text-2xl font-serif group-hover:italic transition-all">{item.name}</h3>
+                                    <div className="space-y-1">
+                                        <p className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-black text-black/40">{item.category}</p>
+                                        <h3 className="text-xl md:text-2xl font-serif group-hover:italic transition-all">{item.name}</h3>
                                     </div>
-                                    <p className="text-xl font-bold tracking-tight">₹{item.price}</p>
+                                    <p className="text-lg md:text-xl font-bold tracking-tight">₹{item.price.toLocaleString('en-IN')}</p>
 
-                                    <div className="flex items-center justify-center sm:justify-start gap-8 pt-4">
-                                        <div className="flex items-center border border-black px-4 py-2">
+                                    <div className="flex items-center justify-center sm:justify-start gap-6 md:gap-8 pt-2 md:pt-4">
+                                        <div className="flex items-center border border-black px-3 py-1.5 md:px-4 md:py-2">
                                             <button
                                                 onClick={() => handleQuantityChange(item._id, item.quantity, -1)}
                                                 className="p-1 hover:scale-125 transition"
                                             >
-                                                <Minus className="w-3 h-3" />
+                                                <Minus className="w-2.5 h-2.5 md:w-3 md:h-3" />
                                             </button>
-                                            <span className="px-6 text-sm font-black">{item.quantity}</span>
+                                            <span className="px-4 md:px-6 text-xs md:text-sm font-black">{item.quantity}</span>
                                             <button
                                                 onClick={() => handleQuantityChange(item._id, item.quantity, 1)}
                                                 className="p-1 hover:scale-125 transition"
                                             >
-                                                <Plus className="w-3 h-3" />
+                                                <Plus className="w-2.5 h-2.5 md:w-3 md:h-3" />
                                             </button>
                                         </div>
                                         <button
                                             onClick={() => removeFromCart(item._id)}
-                                            className="text-black/20 hover:text-black transition-colors"
+                                            className="text-black/20 hover:text-red-600 transition-colors"
                                             title="Remove Fragment"
                                         >
-                                            <Trash2 className="w-4 h-4" />
+                                            <Trash2 className="w-4 h-4 md:w-5 md:h-5" />
                                         </button>
                                     </div>
                                 </div>

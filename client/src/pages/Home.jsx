@@ -121,15 +121,15 @@ const Home = () => {
                         <p className="text-sm text-black/40 max-w-sm">From deep, woody notes to ethereal floral mists, find the scent that speaks your story.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-px bg-black/5 border border-black/5">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-black/5 border border-black/5">
                         {categories.map((cat, idx) => (
-                            <Link key={idx} to={`/shop?category=${cat.name}`} className="group relative bg-white p-12 hover:bg-black transition-colors duration-700 text-center">
-                                <div className="space-y-6">
-                                    <cat.icon className="w-6 h-6 mx-auto group-hover:text-white transition-colors duration-700 opacity-40 group-hover:opacity-100" />
-                                    <h3 className="font-bold text-xs uppercase tracking-[0.3em] font-serif group-hover:text-white transition-colors duration-700">{cat.name}</h3>
+                            <Link key={idx} to={`/shop?category=${cat.name}`} className="group relative bg-white p-8 md:p-12 hover:bg-black transition-colors duration-700 text-center">
+                                <div className="space-y-4 md:space-y-6">
+                                    <cat.icon className="w-5 h-5 md:w-6 md:h-6 mx-auto group-hover:text-white transition-colors duration-700 opacity-40 group-hover:opacity-100" />
+                                    <h3 className="font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] font-serif group-hover:text-white transition-colors duration-700">{cat.name}</h3>
                                 </div>
-                                <div className="mt-8 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">
-                                    <span className="text-[10px] text-white/60 font-black tracking-widest uppercase">Explore</span>
+                                <div className="mt-6 md:mt-8 md:opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">
+                                    <span className="text-[10px] text-black group-hover:text-white/60 font-black tracking-widest uppercase">Explore</span>
                                 </div>
                             </Link>
                         ))}
@@ -138,43 +138,43 @@ const Home = () => {
             </section>
 
             {/* Featured Products */}
-            <section id="products" className="py-32 bg-gray-50/50">
+            <section id="products" className="py-20 md:py-32 bg-gray-50/50">
                 <div className="container mx-auto px-6">
-                    <div className="flex flex-col items-center text-center mb-24 space-y-4">
+                    <div className="flex flex-col items-center text-center mb-16 md:mb-24 space-y-4">
                         <p className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40">The Gallery</p>
-                        <h2 className="text-4xl md:text-5xl font-serif">Featured <span className="italic">Fragrances</span></h2>
+                        <h2 className="text-3xl md:text-5xl font-serif">Featured <span className="italic">Fragrances</span></h2>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
                         {loading ? (
                             <ProductSkeleton count={4} />
                         ) : (
-                            products.map((product) => (
-                                <div key={product._id} className="group relative flex flex-col space-y-6 animate-fadeIn">
+                            products.slice(0, 8).map((product) => (
+                                <div key={product._id} className="group relative flex flex-col space-y-5 md:space-y-6 animate-fadeIn">
                                     <Link to={`/product/${product._id}`} className="block relative aspect-[4/5] bg-white overflow-hidden border border-black/5 group-hover:border-black transition-colors duration-500">
                                         <img
-                                            src={product.image}
+                                            src={product.image || (product.images && product.images[0]) || 'https://via.placeholder.com/400x500?text=Fragrance'}
                                             alt={product.name}
                                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-90 group-hover:opacity-100"
                                         />
-                                        <div className="absolute top-4 left-4 bg-black text-white px-3 py-1 text-[8px] font-black uppercase tracking-widest">
+                                        <div className="absolute top-4 left-4 bg-black text-white px-2 py-1 text-[7px] font-black uppercase tracking-widest">
                                             {product.category}
                                         </div>
                                     </Link>
 
-                                    <div className="space-y-4">
+                                    <div className="space-y-3 md:space-y-4">
                                         <div className="space-y-1">
                                             <Link to={`/product/${product._id}`}>
-                                                <h3 className="font-serif text-xl group-hover:italic transition-all duration-300">{product.name}</h3>
+                                                <h3 className="font-serif text-lg md:text-xl group-hover:italic transition-all duration-300">{product.name}</h3>
                                             </Link>
                                             <div className="flex items-center gap-2 opacity-40">
-                                                <Star className="w-3 h-3 fill-black" />
+                                                <Star className="w-3 h-3 fill-black text-black" />
                                                 <span className="text-[10px] font-bold tracking-widest uppercase">4.8 / 5.0</span>
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center justify-between border-t border-black/5 pt-4">
-                                            <p className="text-lg font-bold tracking-tight">₹{product.sellPrice || product.price}</p>
+                                        <div className="flex items-center justify-between border-t border-black/5 pt-3 md:pt-4">
+                                            <p className="text-base md:text-lg font-bold tracking-tight">₹{product.sellPrice || product.price}</p>
                                             <button
                                                 onClick={() => addToCart(product)}
                                                 className="text-[10px] font-black uppercase tracking-widest hover:underline"

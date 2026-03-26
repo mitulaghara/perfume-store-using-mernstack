@@ -32,16 +32,18 @@ const UserAvatar = ({ name, className }) => {
         return colors[Math.abs(hash) % colors.length];
     };
 
-    const initial = getInitials(name);
-    const bgColor = getColor(name);
+    const characterUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name || 'User')}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`;
 
     return (
-        <div
-            className={`flex items-center justify-center font-bold text-white rounded-full select-none shadow-sm ${className}`}
-            style={{ backgroundColor: bgColor }}
+        <div 
+            className={`flex items-center justify-center overflow-hidden rounded-full select-none shadow-sm bg-gray-100 ${className}`}
             title={name}
         >
-            {initial}
+            <img 
+                src={characterUrl} 
+                alt={name} 
+                className="w-full h-full object-cover"
+            />
         </div>
     );
 };

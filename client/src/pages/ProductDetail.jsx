@@ -68,12 +68,12 @@ const ProductDetail = () => {
                     Back to Collection
                 </button>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 lg:gap-32">
                     {/* Left Column: Image Gallery */}
-                    <div className="space-y-12">
+                    <div className="space-y-8 md:space-y-12">
                         <div className="bg-white aspect-square border border-black/5 flex items-center justify-center relative overflow-hidden group">
                             <img
-                                src={selectedImage || product.image}
+                                src={selectedImage || product.image || (product.images && product.images[0]) || 'https://via.placeholder.com/800x800?text=Fragrance'}
                                 alt={product.name}
                                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 transform group-hover:scale-105"
                             />
@@ -85,7 +85,7 @@ const ProductDetail = () => {
                         </div>
                         {/* Thumbnails */}
                         {images.length > 1 && (
-                            <div className="grid grid-cols-4 gap-6">
+                            <div className="grid grid-cols-4 gap-4 md:gap-6">
                                 {images.map((img, i) => (
                                     <div
                                         key={i}
@@ -101,7 +101,7 @@ const ProductDetail = () => {
 
                     {/* Right Column: Product Info */}
                     <div className="flex flex-col">
-                        <div className="mb-8 flex items-center space-x-4">
+                        <div className="mb-6 md:mb-8 flex items-center space-x-4">
                             <span className="text-[10px] uppercase tracking-[0.4em] font-black text-black/40 border-b border-black/40 pb-1">
                                 {product.category}
                             </span>
@@ -111,36 +111,36 @@ const ProductDetail = () => {
                             </div>
                         </div>
 
-                        <h1 className="text-5xl font-serif mb-8 leading-tight">
+                        <h1 className="text-3xl md:text-5xl font-serif mb-6 md:mb-8 leading-tight">
                             {product.name}
                         </h1>
 
-                        <div className="flex items-baseline gap-4 mb-12">
-                            <span className="text-3xl font-bold tracking-tight">₹{product.sellPrice || product.price}</span>
+                        <div className="flex items-baseline gap-4 mb-10 md:mb-12">
+                            <span className="text-2xl md:text-3xl font-bold tracking-tight">₹{product.sellPrice || product.price}</span>
                             {product.regularPrice && product.sellPrice && product.regularPrice > product.sellPrice && (
-                                <span className="text-lg text-black/20 line-through">₹{product.regularPrice}</span>
+                                <span className="text-base md:text-lg text-black/20 line-through">₹{product.regularPrice}</span>
                             )}
                         </div>
 
-                        <p className="text-sm font-medium text-black/60 leading-loose mb-12 max-w-lg">
+                        <p className="text-xs md:text-sm font-medium text-black/60 leading-loose mb-10 md:mb-12 max-w-lg">
                             {product.description}
                         </p>
 
                         {/* Actions */}
-                        <div className="flex gap-6 mb-16">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 sm:mb-16">
                             <button
                                 onClick={() => {
                                     addToCart(product);
                                     toast.success(`${product.name} added to cart!`);
                                 }}
                                 disabled={product.stock === 0}
-                                className="monochrome-btn flex-1"
+                                className="monochrome-btn flex-1 py-4"
                             >
                                 {product.stock === 0 ? 'Out of Archive' : 'Add to Selection'}
                             </button>
                             <button
                                 onClick={handleWishlistClick}
-                                className={`p-5 px-8 border transition-all duration-500 ${inWishlist
+                                className={`p-4 sm:p-5 sm:px-8 border transition-all duration-500 flex items-center justify-center ${inWishlist
                                     ? 'bg-black text-white border-black'
                                     : 'border-black/5 hover:border-black text-black/20 hover:text-black'
                                     }`}
@@ -150,7 +150,7 @@ const ProductDetail = () => {
                         </div>
 
                         {/* Features */}
-                        <div className="grid grid-cols-2 gap-8 py-12 border-y border-black/5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 py-10 md:py-12 border-y border-black/5">
                             <div className="flex items-start gap-4">
                                 <Truck className="w-5 h-5 opacity-20 mt-1" />
                                 <div>
@@ -170,13 +170,13 @@ const ProductDetail = () => {
                 </div>
 
                 {/* Info Tabs */}
-                <div className="mt-32">
-                    <div className="flex border-b border-black/5 mb-16">
+                <div className="mt-24 md:mt-32">
+                    <div className="flex border-b border-black/5 mb-12 md:mb-16 overflow-x-auto no-scrollbar">
                         {['description', 'specifications', 'reviews'].map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`pb-6 px-10 text-[10px] uppercase tracking-[0.3em] font-black transition-all relative ${activeTab === tab
+                                className={`pb-4 md:pb-6 px-6 md:px-10 text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-black transition-all relative ${activeTab === tab
                                     ? 'text-black'
                                     : 'text-black/20 hover:text-black/40'
                                     }`}
